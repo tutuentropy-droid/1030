@@ -1,7 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { useState } from "react";
-import { ArrowLeft, RotateCcw, Lightbulb, Brain, Zap, Map, Sparkles, Moon } from "lucide-react";
-import { getExperimentById } from "@/data/experiments";
+import { ArrowLeft, RotateCcw, Lightbulb, Brain, Zap, Map, Sparkles, Moon, Shield } from "lucide-react";
+import { getExperimentById, type SubExperiment } from "@/data/experiments";
 import ExplanationCard from "@/components/ExplanationCard";
 import ColorIllusion from "@/experiments/ColorIllusion";
 import MotionIllusion from "@/experiments/MotionIllusion";
@@ -11,13 +11,14 @@ import TimeIllusion from "@/experiments/TimeIllusion";
 import SensoryConflict from "@/experiments/SensoryConflict";
 import RewardCircuit from "@/experiments/RewardCircuit";
 import DreamNeuroscience from "@/experiments/DreamNeuroscience";
+import CognitiveBias from "@/experiments/CognitiveBias";
 import { useBrainMap } from "@/hooks/useBrainMap";
 import { getBrainRegionsByExperiment } from "@/data/brainRegions";
 import UnlockCelebration from "@/components/UnlockCelebration";
 import BrainPathway from "@/components/BrainPathway";
 import type { PathwayData } from "@/components/BrainPathway";
 
-const experimentComponents: Record<string, React.ComponentType<{ onComplete: () => void; subExperiments?: any }>> = {
+const experimentComponents: Record<string, React.ComponentType<{ onComplete: () => void; subExperiments?: SubExperiment[] }>> = {
   "color-illusion": ColorIllusion,
   "motion-illusion": MotionIllusion,
   "memory-illusion": MemoryIllusion,
@@ -26,6 +27,7 @@ const experimentComponents: Record<string, React.ComponentType<{ onComplete: () 
   "sensory-conflict": SensoryConflict,
   "reward-circuit": RewardCircuit,
   "dream-neuroscience": DreamNeuroscience,
+  "cognitive-bias": CognitiveBias,
 };
 
 export default function Experiment() {
@@ -99,6 +101,7 @@ export default function Experiment() {
                   {experiment.icon === "Sparkles" && <Sparkles className="w-full h-full" />}
                   {experiment.icon === "Gift" && <Sparkles className="w-full h-full" />}
                   {experiment.icon === "Moon" && <Moon className="w-full h-full" />}
+                  {experiment.icon === "Shield" && <Shield className="w-full h-full" />}
                 </div>
               </div>
             <div>

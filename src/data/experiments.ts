@@ -263,6 +263,57 @@ export const experiments: Experiment[] = [
     ],
     hasMultiPhase: true,
   },
+  {
+    id: "cognitive-bias",
+    title: "认知漏洞检测",
+    shortDescription: "你的大脑有多容易被骗？",
+    icon: "Shield",
+    accentColor: "#e63946",
+    glowColor: "rgba(230, 57, 70, 0.4)",
+    introduction:
+      "你的大脑一直在用'捷径'帮你做决策——这些捷径在99%的情况下都很管用，但剩下的1%却会让你做出非常愚蠢的判断。骗子、广告商、政客们都深谙此道。在这个测试中，你将面对假新闻判断、视觉误导、概率错觉、风险判断等一系列精心设计的陷阱，系统会记录哪些神经偏差最容易影响你，最后生成一份专属的'认知漏洞热力图'。",
+    gameInstruction:
+      "你将经历4轮共16道题目，涵盖4种认知陷阱类型。请根据你的直觉快速回答——不要花太多时间思考，因为我们测试的正是大脑的'自动化偏差'。每题作答后，系统会告诉你是否被'骗'了，以及对应的是哪种认知偏差。准备好了吗？让我们看看你的大脑有多少漏洞！",
+    phenomenon:
+      "认知偏差（Cognitive Bias）是大脑为了快速决策而演化出来的'思维捷径'——它们不是bug，而是feature。但这些捷径在现代信息环境中却变成了漏洞：损失厌恶让我们为了避免小损失而承担大风险，确认偏误让我们只看自己想看的信息，锚定效应让我们被第一个数字牵着走，框架效应让同一个问题换个说法就做出完全相反的选择，可用性启发让我们高估飞机失事的概率（因为新闻报道太多），情感启发让我们因为一个故事而忽略统计数据……这就是为什么'聪明人也会做傻事'——因为偏差发生在意识层面之下。",
+    neurosciencePrinciple:
+      "认知偏差的神经基础是大脑的'双系统理论'（Dual Process Theory）：系统1（直觉系统）由杏仁核、腹内侧前额叶、基底神经节等区域驱动，快速、自动、情绪化、消耗能量少；系统2（理性系统）由背外侧前额叶、前扣带皮层等区域驱动，缓慢、深思、消耗能量多。95%的决策都是系统1做出的——这是大脑的节能策略。但系统1依赖的是进化上有用的启发式规则，在信息爆炸、逻辑复杂的现代环境中，这些规则经常失灵。例如：杏仁核（恐惧中枢）会高估恐惧事件的概率（可用性启发），伏隔核（奖励中枢）会低估延迟损失的严重性（双曲贴现），腹内侧前额叶会根据故事而非数据做决策（情感启发），确认偏误则与多巴胺奖励系统有关——当我们遇到符合预期的信息时，多巴胺会释放，产生愉悦感，于是我们主动'筛选'能让自己开心的信息。",
+    realLifeExamples: [
+      "90%的司机认为自己的驾驶水平高于平均——这就是'优于平均效应'，也叫乌比冈湖效应",
+      "为什么股票下跌时人们死扛不卖，上涨时却急于落袋为安？因为'损失厌恶'——损失带来的痛苦是收益快乐的2.5倍",
+      "为什么超市标价$9.99而不是$10？因为'左位效应'让我们觉得便宜了很多",
+      "为什么你总是在头条上看到自己想看的？因为算法利用了你的确认偏误，制造'信息茧房'",
+      "为什么会被'最后3个名额！'、'仅剩2件！'逼得匆忙下单？这就是'稀缺效应'激活了损失厌恶",
+      "为什么'90%存活率'的手术比'10%死亡率'让人更容易接受？因为框架效应改变了同一个事实的呈现方式",
+    ],
+    subExperiments: [
+      {
+        id: "fake-news",
+        title: "假新闻判断",
+        description: "你能分辨真假新闻吗？",
+        brainPathway: ["amygdala", "prefrontal-cortex", "hippocampus", "superior-temporal-sulcus"],
+      },
+      {
+        id: "visual-mislead",
+        title: "视觉误导",
+        description: "你的眼睛会被统计图欺骗吗？",
+        brainPathway: ["visual-cortex", "parietal-lobe", "prefrontal-cortex"],
+      },
+      {
+        id: "probability-illusion",
+        title: "概率错觉",
+        description: "你的直觉概率判断有多准？",
+        brainPathway: ["prefrontal-cortex", "amygdala", "insula", "parietal-lobe"],
+      },
+      {
+        id: "risk-judgment",
+        title: "风险判断",
+        description: "你能理性评估风险吗？",
+        brainPathway: ["amygdala", "prefrontal-cortex", "insula", "nucleus-accumbens"],
+      },
+    ],
+    hasMultiPhase: true,
+  },
 ];
 
 export function getExperimentById(id: string): Experiment | undefined {

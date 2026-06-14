@@ -8,6 +8,9 @@ import {
   ArrowRight,
   Check,
   Sparkles,
+  Shield,
+  Gift,
+  Moon,
 } from "lucide-react";
 import type { Experiment } from "@/data/experiments";
 import { useBrainMap } from "@/hooks/useBrainMap";
@@ -19,6 +22,9 @@ const iconMap: Record<string, typeof Palette> = {
   Eye,
   Clock,
   Sparkles,
+  Shield,
+  Gift,
+  Moon,
 };
 
 interface ExperimentCardProps {
