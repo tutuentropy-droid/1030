@@ -555,6 +555,10 @@ export default function SensoryConflict({
                 <p className="text-museum-300/60 text-sm mt-4">
                   （这就是橡胶手错觉最强有力的证明）
                 </p>
+                <button onClick={handleRubberContinue} className="btn-primary gap-2 mt-8">
+                  进入下一个实验
+                  <ChevronRight className="w-4 h-4" />
+                </button>
               </div>
             )}
           </div>
