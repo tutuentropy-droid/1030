@@ -4,6 +4,7 @@ import {
   getBrainRegionsByExperiment,
   type BrainRegion,
 } from "@/data/brainRegions";
+import { experiments } from "@/data/experiments";
 
 const STORAGE_KEYS = {
   completedExperiments: "neuro_museum_completed_experiments",
@@ -137,7 +138,7 @@ export function useBrainMap(): UseBrainMapReturn {
   const completionStats = useMemo(
     () => ({
       completedExperiments: completedExperiments.length,
-      totalExperiments: 5,
+      totalExperiments: experiments.length,
       unlockedRegions: unlockedRegions.length,
       totalRegions: brainRegions.length,
     }),

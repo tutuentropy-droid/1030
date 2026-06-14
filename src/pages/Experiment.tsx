@@ -1,6 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import { useState } from "react";
-import { ArrowLeft, RotateCcw, Lightbulb, Brain, Zap, Map } from "lucide-react";
+import { ArrowLeft, RotateCcw, Lightbulb, Brain, Zap, Map, Sparkles } from "lucide-react";
 import { getExperimentById } from "@/data/experiments";
 import ExplanationCard from "@/components/ExplanationCard";
 import ColorIllusion from "@/experiments/ColorIllusion";
@@ -8,16 +8,20 @@ import MotionIllusion from "@/experiments/MotionIllusion";
 import MemoryIllusion from "@/experiments/MemoryIllusion";
 import AttentionBlindspot from "@/experiments/AttentionBlindspot";
 import TimeIllusion from "@/experiments/TimeIllusion";
+import SensoryConflict from "@/experiments/SensoryConflict";
 import { useBrainMap } from "@/hooks/useBrainMap";
 import { getBrainRegionsByExperiment } from "@/data/brainRegions";
 import UnlockCelebration from "@/components/UnlockCelebration";
+import BrainPathway from "@/components/BrainPathway";
+import type { PathwayData } from "@/components/BrainPathway";
 
-const experimentComponents: Record<string, React.ComponentType<{ onComplete: () => void }>> = {
+const experimentComponents: Record<string, React.ComponentType<{ onComplete: () => void; subExperiments?: any }>> = {
   "color-illusion": ColorIllusion,
   "motion-illusion": MotionIllusion,
   "memory-illusion": MemoryIllusion,
   "attention-blindspot": AttentionBlindspot,
   "time-illusion": TimeIllusion,
+  "sensory-conflict": SensoryConflict,
 };
 
 export default function Experiment() {
@@ -76,21 +80,21 @@ export default function Experiment() {
           </Link>
 
           <div className="flex items-center gap-4">
-            <div
-              className="w-14 h-14 rounded-2xl flex items-center justify-center"
-              style={{
-                background: `linear-gradient(135deg, ${experiment.accentColor}40, ${experiment.accentColor}10)`,
-                boxShadow: `0 0 30px ${experiment.glowColor}`,
-              }}
-            >
-              <div className="w-7 h-7" style={{ color: experiment.accentColor }}>
-                {experiment.icon === "Palette" && <Lightbulb className="w-full h-full" />}
-                {experiment.icon === "RotateCw" && <Zap className="w-full h-full" />}
-                {experiment.icon === "Brain" && <Brain className="w-full h-full" />}
-                {experiment.icon === "Eye" && <Lightbulb className="w-full h-full" />}
-                {experiment.icon === "Clock" && <Zap className="w-full h-full" />}
+            <div className="w-14 h-14 rounded-2xl flex items-center justify-center"
+                style={{
+                  background: `linear-gradient(135deg, ${experiment.accentColor}40, ${experiment.accentColor}10)`,
+                  boxShadow: `0 0 30px ${experiment.glowColor}`,
+                }}
+              >
+                <div className="w-7 h-7" style={{ color: experiment.accentColor }}>
+                  {experiment.icon === "Palette" && <Lightbulb className="w-full h-full" />}
+                  {experiment.icon === "RotateCw" && <Zap className="w-full h-full" />}
+                  {experiment.icon === "Brain" && <Brain className="w-full h-full" />}
+                  {experiment.icon === "Eye" && <Lightbulb className="w-full h-full" />}
+                  {experiment.icon === "Clock" && <Zap className="w-full h-full" />}
+                  {experiment.icon === "Sparkles" && <Sparkles className="w-full h-full" />}
+                </div>
               </div>
-            </div>
             <div>
               <h1 className="text-3xl md:text-4xl font-display font-bold text-white">
                 {experiment.title}
@@ -121,7 +125,10 @@ export default function Experiment() {
 
           {gamePhase === "playing" && ExperimentGame && (
             <div className="animate-fade-in">
-              <ExperimentGame onComplete={handleComplete} />
+              <ExperimentGame
+                onComplete={handleComplete}
+                subExperiments={experiment?.subExperiments}
+              />
             </div>
           )}
 
@@ -193,6 +200,49 @@ export default function Experiment() {
                   <span>→</span>
                 </Link>
               </div>
+
+              {experiment?.subExperiments && experiment.subExperiments.length > 0 && (
+                <div className="max-w-xl mx-auto mb-8 animate-slide-up"
+                  style={{ animationDelay: "0.2s", animationFillMode: "both" }}>
+                  <BrainPathway
+                    pathways={
+                      experiment.subExperiments.map(
+                        (sub, idx): PathwayData => ({
+                          id: sub.id,
+                          label: sub.title,
+                          description: sub.description,
+                          regionIds: sub.brainPathway,
+                          color: [
+                            "#f72585",
+                            "#38b000",
+                            "#ff9e00",
+                          ][idx % 3],
+                        })
+                      )
+                    }
+                    title="🧠 各子实验脑区参与链路（可叠加查看）"
+                  />
+                </div>
+              )}
+
+              {!experiment?.subExperiments && relatedBrainRegions.length > 1 && (
+                <div className="max-w-xl mx-auto mb-8 animate-slide-up"
+                  style={{ animationDelay: "0.2s", animationFillMode: "both" }}>
+                  <BrainPathway
+                    pathways={[
+                      {
+                        id: experiment?.id ?? "default",
+                        label: `${experiment?.title ?? "本实验"} 参与通路`,
+                        description: "信息处理过程中的主要脑区激活顺序",
+                        regionIds: relatedBrainRegions.map((r) => r.id),
+                        color: experiment?.accentColor ?? "#9d4edd",
+                      },
+                    ]}
+                    title="🧠 本实验脑区参与链路"
+                    showToggleControls={false}
+                  />
+                </div>
+              )}
               </div>
 
               {showExplanation && (

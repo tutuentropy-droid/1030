@@ -35,6 +35,7 @@ export default {
           pink: "#ff006e",
           yellow: "#ffbe0b",
           green: "#06ffa5",
+          orange: "#ff9e00",
         },
       },
       fontFamily: {

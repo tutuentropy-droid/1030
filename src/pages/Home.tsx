@@ -67,12 +67,12 @@ export default function Home() {
 
           <div className="mt-20 flex justify-center gap-8 text-center animate-fade-in" style={{ animationDelay: "0.5s", animationFillMode: "both" }}>
             <div>
-              <div className="text-3xl font-bold gradient-text">5</div>
+              <div className="text-3xl font-bold gradient-text">{stats.totalExperiments}</div>
               <div className="text-sm text-museum-300/60">互动实验</div>
             </div>
             <div className="w-px bg-white/10" />
             <div>
-              <div className="text-3xl font-bold gradient-text">5</div>
+              <div className="text-3xl font-bold gradient-text">{stats.totalRegions}</div>
               <div className="text-sm text-museum-300/60">大脑区域</div>
             </div>
             <div className="w-px bg-white/10" />

@@ -1,3 +1,10 @@
+export interface SubExperiment {
+  id: string;
+  title: string;
+  description: string;
+  brainPathway: string[];
+}
+
 export interface Experiment {
   id: string;
   title: string;
@@ -10,6 +17,8 @@ export interface Experiment {
   phenomenon: string;
   neurosciencePrinciple: string;
   realLifeExamples: string[];
+  subExperiments?: SubExperiment[];
+  hasMultiPhase?: boolean;
 }
 
 export const experiments: Experiment[] = [
@@ -122,6 +131,49 @@ export const experiments: Experiment[] = [
       "运动员在比赛中仿佛进入'子弹时间'，动作放慢、思维清晰",
       "冥想和正念练习可以改变时间感知，让人更专注于当下",
     ],
+  },
+  {
+    id: "sensory-conflict",
+    title: "感官打架实验",
+    shortDescription: "当你的感官互相矛盾时...",
+    icon: "Sparkles",
+    accentColor: "#f72585",
+    glowColor: "rgba(247, 37, 133, 0.4)",
+    introduction:
+      "你的眼睛、耳朵、皮肤和舌头真的意见一致吗？当不同感官传递矛盾的信息时，大脑会相信谁？在这个多阶段实验中，你将体验三种经典的感官冲突现象：McGurk效应（视听冲突）、橡胶手错觉（触觉与视觉冲突）、以及声音改变味觉感知。",
+    gameInstruction:
+      "按照指示依次完成三个子实验，每个实验都会让你的感官产生奇妙的冲突。准备好了吗？让我们看看大脑会如何裁决！",
+    phenomenon:
+      "感官冲突实验揭示了一个惊人的事实：我们的感知不是单一感官的简单叠加，而是大脑对多种感官信息进行动态整合和权衡的结果。当视觉和听觉信息矛盾时，大脑往往会'创造'出一种折中的感知（McGurk效应）；当视觉和触觉冲突时，大脑甚至会将橡胶手误认为自己的手（橡胶手错觉）；声音频率的变化还能改变我们对食物酥脆度的感知。这些错觉之所以存在，是因为大脑始终在试图构建一个最'合理'的外部世界模型。",
+    neurosciencePrinciple:
+      "多感官整合主要发生在大脑的颞上沟（STS）、顶叶皮层和岛叶皮层。颞上沟是视听整合的关键区域，它接收来自视觉皮层和听觉皮层的信息，并检测它们之间的时间和空间一致性。顶叶皮层负责将视觉信息与躯体感觉信息整合，构建身体表征（body representation）——橡胶手错觉正是因为顶叶被视觉信息'欺骗'，更新了身体模型。岛叶则参与味觉、触觉和内感受的整合，声音通过听觉皮层影响岛叶的味觉处理，从而改变味觉感知。前额叶皮层在整个过程中扮演'裁判'角色，评估各感官信息的可靠性，并最终决定采信哪个版本的'现实'。",
+    realLifeExamples: [
+      "电影配音和口型不一致时会让观众感觉非常违和，这正是McGurk效应的反向体现",
+      "VR/AR设备必须精确协调视觉、听觉和触觉反馈，否则会产生晕动症",
+      "为什么蒙上眼睛吃东西味道会变差——视觉提供了80%以上的'味觉'信息",
+      "汽车制造商利用发动机声音设计来让你感觉汽车更有'力量感'，声音会影响你对性能的感知",
+    ],
+    subExperiments: [
+      {
+        id: "mcgurk",
+        title: "McGurk 效应",
+        description: "视觉和听觉不一致时，大脑会相信谁？",
+        brainPathway: ["auditory-cortex", "visual-cortex", "superior-temporal-sulcus", "prefrontal-cortex"],
+      },
+      {
+        id: "rubber-hand",
+        title: "橡胶手错觉",
+        description: "大脑会把假手当成自己的手吗？",
+        brainPathway: ["visual-cortex", "somatosensory-cortex", "parietal-lobe", "prefrontal-cortex"],
+      },
+      {
+        id: "sound-taste",
+        title: "声音改变味觉",
+        description: "声音频率会改变食物的酥脆感？",
+        brainPathway: ["auditory-cortex", "gustatory-cortex", "insula", "prefrontal-cortex"],
+      },
+    ],
+    hasMultiPhase: true,
   },
 ];
 
