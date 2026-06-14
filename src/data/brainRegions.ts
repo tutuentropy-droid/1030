@@ -26,7 +26,7 @@ export const brainRegions: BrainRegion[] = [
       "海马体是大脑内侧颞叶的一个关键结构，形似海马，是记忆形成和空间导航的核心区域。它负责将短期记忆转化为长期记忆，并帮助我们在环境中定位自己。",
     color: "#ff006e",
     glowColor: "rgba(255, 0, 110, 0.5)",
-    relatedExperiments: ["memory-illusion"],
+    relatedExperiments: ["memory-illusion", "dream-neuroscience"],
     faqs: [
       {
         question: "海马体损伤会怎样？",
@@ -61,7 +61,7 @@ export const brainRegions: BrainRegion[] = [
       "杏仁核是位于大脑内侧颞叶的杏仁状结构，是情绪处理的核心，特别是恐惧和焦虑的检测与反应。它在形成情绪化记忆和触发战斗-逃跑反应中起着关键作用。",
     color: "#ff5c8a",
     glowColor: "rgba(255, 92, 138, 0.5)",
-    relatedExperiments: ["time-illusion", "memory-illusion", "reward-circuit"],
+    relatedExperiments: ["time-illusion", "memory-illusion", "reward-circuit", "dream-neuroscience"],
     faqs: [
       {
         question: "为什么危险时刻感觉时间变慢？",
@@ -96,7 +96,7 @@ export const brainRegions: BrainRegion[] = [
       "前额叶皮层位于大脑额叶的最前部，是人类大脑进化程度最高的区域。它负责执行功能：计划、决策、工作记忆、注意力控制、冲动抑制和社会行为的调节。",
     color: "#9d4edd",
     glowColor: "rgba(157, 78, 221, 0.5)",
-    relatedExperiments: ["attention-blindspot", "memory-illusion", "time-illusion", "reward-circuit"],
+    relatedExperiments: ["attention-blindspot", "memory-illusion", "time-illusion", "reward-circuit", "dream-neuroscience"],
     faqs: [
       {
         question: "为什么我会错过眼前的大猩猩？",
@@ -131,7 +131,7 @@ export const brainRegions: BrainRegion[] = [
       "视觉皮层位于大脑枕叶，是处理视觉信息的主要区域。它分为多个层级（V1到V5），从基本的边缘检测、颜色识别到复杂的形状、运动和场景理解层层递进。",
     color: "#00d4ff",
     glowColor: "rgba(0, 212, 255, 0.5)",
-    relatedExperiments: ["color-illusion", "motion-illusion", "attention-blindspot"],
+    relatedExperiments: ["color-illusion", "motion-illusion", "attention-blindspot", "dream-neuroscience"],
     faqs: [
       {
         question: "为什么我们会被视觉错觉欺骗？",
@@ -472,6 +472,111 @@ export const brainRegions: BrainRegion[] = [
     ],
     position: { x: 35, y: 62, width: 12, height: 12 },
     emoji: "👅",
+  },
+  {
+    id: "pons",
+    name: "Pons",
+    chineseName: "脑桥",
+    description:
+      "脑桥位于脑干上部，是睡眠周期的核心控制器。它通过脑桥-膝状体-枕叶波（PGO波）的神经脉冲，将随机神经信号从脑桥传递到丘脑和视觉皮层，这就是REM睡眠中梦境图像的生理起点。脑桥还负责在REM睡眠期间麻痹身体肌肉，防止我们把梦'演出来'。",
+    color: "#560bad",
+    glowColor: "rgba(86, 11, 173, 0.5)",
+    relatedExperiments: ["dream-neuroscience"],
+    faqs: [
+      {
+        question: "PGO波和梦境有什么关系？",
+        answer:
+          "PGO波（Ponto-Geniculo-Occipital waves）是REM睡眠开始后脑桥发出的巨大神经元放电脉冲，它们像烟花一样随机'点燃'丘脑和视觉皮层。这些信号本身没有任何意义或故事——它们只是随机的神经噪声。但大脑皮层接收到这些混乱的信号后，会试图把它们'翻译'和'合成'成一个故事，这就是梦境。这就是霍布森和麦卡利的激活-合成理论的核心：梦是大脑对随机神经信号的事后合理化解释。",
+      },
+      {
+        question: "为什么做梦时身体不会动？",
+        answer:
+          "脑桥在REM睡眠期间会主动抑制脊髓运动神经元，释放甘氨酸和GABA等抑制性神经递质，让全身肌肉（除了眼睛和呼吸肌外）几乎完全麻痹。这是一种保护机制，防止你把梦境中的动作真实地表现出来，否则可能会伤害自己或床伴。有些人患有REM睡眠行为障碍（RBD），这个抑制机制失效了，会在睡梦中拳打脚踢甚至跳下床。",
+      },
+      {
+        question: "脑桥损伤会怎样影响睡眠？",
+        answer:
+          "脑桥损伤会导致严重的睡眠障碍，包括无法进入REM睡眠。某些脑桥病变患者报告说完全停止做梦，同时记忆整合也会受到严重影响。这也解释了为什么某些脑干中风患者会出现梦的消失。",
+      },
+    ],
+    realLifeImpacts: [
+      "发作性睡病患者的脑桥功能异常，导致在清醒时也会突然进入REM睡眠状态，出现猝倒和入睡前幻觉",
+      "有些人在刚睡醒时会经历'睡眠瘫痪'（鬼压床），就是脑桥的肌肉麻痹机制在醒来后还没解除，意识恢复了但身体还动不了",
+      "抑郁症患者的REM睡眠异常活跃，且睡眠结构紊乱，这与脑桥和杏仁核的过度活动有关",
+      "选择性5-羟色胺再摄取抑制剂（SSRIs）等抗抑郁药会抑制REM睡眠，改变做梦的频率和强度",
+    ],
+    position: { x: 45, y: 68, width: 10, height: 8 },
+    emoji: "🌉",
+  },
+  {
+    id: "thalamus",
+    name: "Thalamus",
+    chineseName: "丘脑",
+    description:
+      "丘脑是大脑的'感觉门户'，几乎所有感官信息（除了嗅觉）都要经过丘脑才能到达大脑皮层。在睡眠过程中，丘脑的'门'会变化：清醒时完全开放传递外界信息；NREM睡眠时丘脑逐渐关闭，减少外界干扰；REM睡眠时丘脑虽然关闭了外界通道，但打开了内部通道——将脑桥的随机信号传递到皮层，为梦境提供'原材料'。",
+    color: "#4361ee",
+    glowColor: "rgba(67, 97, 238, 0.5)",
+    relatedExperiments: ["dream-neuroscience"],
+    faqs: [
+      {
+        question: "为什么睡着后听不到声音却能看到梦境？",
+        answer:
+          "在REM睡眠中，丘脑的'大门'关闭了对外的感觉通道，但打开了另一扇内部门：它开始将脑桥发出的PGO波传递到视觉皮层。所以你在梦中'看到'的东西，不是来自眼睛，而是来自脑桥的随机神经脉冲——丘脑在'翻译'内部的神经噪声。这就是为什么梦境图像生动却荒诞：原材料是随机的。",
+      },
+      {
+        question: "深睡时为什么不容易被叫醒？",
+        answer:
+          "在NREM深睡阶段，丘脑的感觉门几乎完全关闭，外界的声音、触觉信号被大幅减弱，无法到达大脑皮层。这是一种保护机制，让大脑能够进行记忆整合和突触修剪工作而不被干扰。只有非常强烈的刺激（如很大声的闹钟）才能强行冲开丘脑的门。",
+      },
+      {
+        question: "丘脑在记忆形成中的作用？",
+        answer:
+          "NREM睡眠期间，丘脑与海马体和大脑皮层形成了一个功能闭环。丘脑产生的睡眠纺锤波（sleep spindles，丘脑-皮层的同步放电）与海马体的锐波涟漪（sharp-wave ripples）协同工作，将海马体中的短期记忆'转移'到大脑皮层，形成长期记忆。",
+      },
+    ],
+    realLifeImpacts: [
+      "耳鸣可能与丘脑的听觉门控机制异常有关，丘脑在没有外界声音时仍然向听觉皮层传递了虚假的信号",
+      "冥想可以调节丘脑的门控功能，减少外界干扰信息输入，增强专注力",
+      "精神分裂症患者的丘脑门控功能受损，无法区分真实的外界信号和内部产生的信号",
+      "睡眠纺锤波的强度与学习记忆能力正相关——多睡觉、睡好觉真的能变聪明",
+    ],
+    position: { x: 48, y: 30, width: 10, height: 12 },
+    emoji: "🚪",
+  },
+  {
+    id: "default-mode-network",
+    name: "Default Mode Network",
+    chineseName: "默认模式网络",
+    description:
+      "默认模式网络（DMN）是大脑在安静休息、做白日梦、回忆过去、思考未来时激活的神经网络，包括内侧前额叶、后扣带回和角回。它是大脑在我们没有外界任务时'离线'运行的自发思维系统，在REM睡眠中也高度活跃——这可能是梦境荒诞跳跃性和思绪游离的神经基础。",
+    color: "#f72585",
+    glowColor: "rgba(247, 37, 133, 0.5)",
+    relatedExperiments: ["dream-neuroscience"],
+    faqs: [
+      {
+        question: "默认模式网络和做白日梦的关系？",
+        answer:
+          "你在课堂上走神，或者洗澡时灵感闪现，都是默认模式网络在工作。DMN激活时，你对外界任务的注意力减弱，内在的想法、记忆和情感开始自由流动和联想。REM睡眠中的DMN激活程度比清醒时更高，且不受前额叶的约束——这就是为什么梦境比白日梦更荒诞、更情绪化。",
+      },
+      {
+        question: "默认模式网络和梦境有什么关系？",
+        answer:
+          "REM睡眠中，默认模式网络高度活跃，而负责任务导向的执行控制网络（前额叶）被抑制。DMN的激活让过去的记忆、情感和想象自由组合，不受逻辑和现实约束，这正是梦境的特征：场景跳跃、时间错乱、人物身份模糊。梦的荒诞感本质上是DMN在没有前额叶'审查'下的自由运行。",
+      },
+      {
+        question: "过度活跃的默认模式网络会导致什么？",
+        answer:
+          "DMN过度活跃与反刍思维（rumination）和抑郁症有关。抑郁患者常常反复回想过去的负面经历，无法从DMN的自我参照思维中切换出来。正念冥想可以降低DMN的基线活动水平，减少反刍和焦虑。",
+      },
+    ],
+    realLifeImpacts: [
+      "创意灵感往往在DMN激活时出现——散步、洗澡、做无聊家务时的'啊哈'时刻",
+      "长期压力和抑郁症与DMN过度活跃和反刍思维密切相关",
+      "正念冥想通过降低DMN活动，减少反刍和焦虑",
+      "ADHD患者的DMN和任务网络切换困难，导致注意力不集中和思维游荡",
+    ],
+    position: { x: 25, y: 20, width: 18, height: 20 },
+    emoji: "💭",
   },
 ];
 

@@ -1,6 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import { useState } from "react";
-import { ArrowLeft, RotateCcw, Lightbulb, Brain, Zap, Map, Sparkles } from "lucide-react";
+import { ArrowLeft, RotateCcw, Lightbulb, Brain, Zap, Map, Sparkles, Moon } from "lucide-react";
 import { getExperimentById } from "@/data/experiments";
 import ExplanationCard from "@/components/ExplanationCard";
 import ColorIllusion from "@/experiments/ColorIllusion";
@@ -10,6 +10,7 @@ import AttentionBlindspot from "@/experiments/AttentionBlindspot";
 import TimeIllusion from "@/experiments/TimeIllusion";
 import SensoryConflict from "@/experiments/SensoryConflict";
 import RewardCircuit from "@/experiments/RewardCircuit";
+import DreamNeuroscience from "@/experiments/DreamNeuroscience";
 import { useBrainMap } from "@/hooks/useBrainMap";
 import { getBrainRegionsByExperiment } from "@/data/brainRegions";
 import UnlockCelebration from "@/components/UnlockCelebration";
@@ -24,6 +25,7 @@ const experimentComponents: Record<string, React.ComponentType<{ onComplete: () 
   "time-illusion": TimeIllusion,
   "sensory-conflict": SensoryConflict,
   "reward-circuit": RewardCircuit,
+  "dream-neuroscience": DreamNeuroscience,
 };
 
 export default function Experiment() {
@@ -96,6 +98,7 @@ export default function Experiment() {
                   {experiment.icon === "Clock" && <Zap className="w-full h-full" />}
                   {experiment.icon === "Sparkles" && <Sparkles className="w-full h-full" />}
                   {experiment.icon === "Gift" && <Sparkles className="w-full h-full" />}
+                  {experiment.icon === "Moon" && <Moon className="w-full h-full" />}
                 </div>
               </div>
             <div>
