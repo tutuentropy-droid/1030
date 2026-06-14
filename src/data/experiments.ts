@@ -175,6 +175,56 @@ export const experiments: Experiment[] = [
     ],
     hasMultiPhase: true,
   },
+  {
+    id: "reward-circuit",
+    title: "奖励回路实验",
+    shortDescription: "为什么大脑偏爱即时奖励？",
+    icon: "Gift",
+    accentColor: "#fb5607",
+    glowColor: "rgba(251, 86, 7, 0.4)",
+    introduction:
+      "为什么明明知道应该学习，却忍不住刷视频？为什么减肥时总是抗拒不了甜点？为什么游戏和社交媒体让我们欲罢不能？在这个实验中，你将亲身体验大脑奖励系统如何工作——通过模拟短视频、糖分、游戏、社交点赞这四种最常见的'多巴胺劫持者'，你会看到自己的奖励敏感度如何变化，自控能力如何被消耗。",
+    gameInstruction:
+      "你将经历20轮选择。每一轮都会面临一个两难抉择：是选择即时的愉悦（刷视频、吃甜点、玩游戏、刷朋友圈），还是选择长期的收益（学习、工作、锻炼、健康饮食）。系统会实时追踪你的大脑状态——多巴胺水平（奖励敏感度）和前额叶活动（自控能力）。注意：每次选择即时奖励会让多巴胺暂时升高，但长期会降低敏感度，还会消耗自控力。看看你能坚持多少轮的'正确选择'，以及当自控力耗尽时会发生什么。",
+    phenomenon:
+      "这就是'延迟折扣'（Delay Discounting）和'自我损耗'（Ego Depletion）现象的结合。大脑的奖励系统（伏隔核+VTA）会大幅高估即时奖励的价值，而低估延迟奖励的价值。与此同时，前额叶皮层的自控能力是一种有限资源，每一次抵制诱惑都会消耗它，当它耗尽时，我们就会'失控'。这就是为什么经过一天辛苦工作后，晚上更容易放纵自己——因为你的自控力已经用完了。",
+    neurosciencePrinciple:
+      "奖励回路的核心是中脑边缘多巴胺通路：腹侧被盖区（VTA）释放多巴胺，投射到伏隔核（NAc）和前额叶皮层（PFC）。当我们获得即时奖励时，多巴胺会大量释放，产生愉悦感并强化该行为。但伏隔核有一个'时间折扣'机制——奖励越延迟，主观价值就越低，这是一个双曲线函数（不是线性的）。前额叶皮层负责抵制冲动、考虑长远后果，但它的功能会消耗葡萄糖等能量资源，持续使用后效率会下降。当伏隔核的多巴胺信号强于前额叶的调控信号时，我们就会选择即时满足。更糟糕的是，糖、短视频、游戏这些'超级刺激物'会导致多巴胺受体脱敏，需要越来越强的刺激才能达到同样的愉悦感，形成恶性循环。",
+    realLifeExamples: [
+      "短视频App利用无限滚动和算法推荐，让你永远不知道下一条是什么，这种不确定性会疯狂刺激多巴胺释放",
+      "糖和高脂肪食物在伏隔核中的反应与毒品类似，这就是为什么减肥如此困难的神经学原因",
+      "游戏中的'抽卡'和'升级'机制利用可变比率强化，创造类似赌博的成瘾性",
+      "社交媒体的点赞、评论、小红点等社交反馈，通过激活奖励系统让我们不断刷新查看",
+      "为什么年底/周一会制定很多计划，但执行几天就放弃——因为长期目标在伏隔核中的价值太低",
+    ],
+    subExperiments: [
+      {
+        id: "short-video",
+        title: "短视频诱惑",
+        description: "学习还是刷视频？多巴胺的战争",
+        brainPathway: ["ventral-tegmental-area", "nucleus-accumbens", "prefrontal-cortex", "amygdala"],
+      },
+      {
+        id: "sugar-craving",
+        title: "糖分诱惑",
+        description: "健康餐还是甜点？糖是合法的毒品",
+        brainPathway: ["ventral-tegmental-area", "nucleus-accumbens", "prefrontal-cortex", "insula"],
+      },
+      {
+        id: "game-addiction",
+        title: "游戏诱惑",
+        description: "工作还是打游戏？升级的快感",
+        brainPathway: ["ventral-tegmental-area", "nucleus-accumbens", "prefrontal-cortex", "reward-system"],
+      },
+      {
+        id: "social-likes",
+        title: "社交点赞诱惑",
+        description: "专注还是刷朋友圈？社交反馈的力量",
+        brainPathway: ["ventral-tegmental-area", "nucleus-accumbens", "prefrontal-cortex", "amygdala"],
+      },
+    ],
+    hasMultiPhase: true,
+  },
 ];
 
 export function getExperimentById(id: string): Experiment | undefined {

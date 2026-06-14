@@ -61,7 +61,7 @@ export const brainRegions: BrainRegion[] = [
       "杏仁核是位于大脑内侧颞叶的杏仁状结构，是情绪处理的核心，特别是恐惧和焦虑的检测与反应。它在形成情绪化记忆和触发战斗-逃跑反应中起着关键作用。",
     color: "#ff5c8a",
     glowColor: "rgba(255, 92, 138, 0.5)",
-    relatedExperiments: ["time-illusion", "memory-illusion"],
+    relatedExperiments: ["time-illusion", "memory-illusion", "reward-circuit"],
     faqs: [
       {
         question: "为什么危险时刻感觉时间变慢？",
@@ -96,7 +96,7 @@ export const brainRegions: BrainRegion[] = [
       "前额叶皮层位于大脑额叶的最前部，是人类大脑进化程度最高的区域。它负责执行功能：计划、决策、工作记忆、注意力控制、冲动抑制和社会行为的调节。",
     color: "#9d4edd",
     glowColor: "rgba(157, 78, 221, 0.5)",
-    relatedExperiments: ["attention-blindspot", "memory-illusion", "time-illusion"],
+    relatedExperiments: ["attention-blindspot", "memory-illusion", "time-illusion", "reward-circuit"],
     faqs: [
       {
         question: "为什么我会错过眼前的大猩猩？",
@@ -159,6 +159,76 @@ export const brainRegions: BrainRegion[] = [
     emoji: "👁️",
   },
   {
+    id: "ventral-tegmental-area",
+    name: "Ventral Tegmental Area",
+    chineseName: "腹侧被盖区",
+    description:
+      "腹侧被盖区（VTA）位于中脑，是大脑多巴胺的主要来源之一。它的多巴胺神经元会向伏隔核、前额叶皮层和其他脑区投射，构成了中脑边缘多巴胺通路。VTA的核心功能是编码'预测误差'——当现实好于预期时，多巴胺神经元会爆发式放电，从而强化导致这个好结果的行为。",
+    color: "#7ae582",
+    glowColor: "rgba(122, 229, 130, 0.5)",
+    relatedExperiments: ["reward-circuit"],
+    faqs: [
+      {
+        question: "VTA和多巴胺有什么关系？",
+        answer:
+          "VTA是多巴胺能神经元最集中的脑区之一。这些神经元的轴突延伸到伏隔核、前额叶皮层和海马体等脑区，构成了奖励通路。当你获得意外奖励时，VTA的多巴胺神经元会同步放电，产生一阵多巴胺'潮'，这就是你感到愉悦和想要重复行为的神经基础。",
+      },
+      {
+        question: "为什么VTA容易被劫持？",
+        answer:
+          "VTA的多巴胺系统对不确定性和即时奖励特别敏感。短视频、游戏、社交媒体故意设计成可变奖励模式——你永远不知道下一条是什么。这种不确定性会让VTA持续释放多巴胺，劫持你的动机系统，让你不断地刷下去，即使你并不真的享受。",
+      },
+      {
+        question: "VTA和成瘾有什么关系？",
+        answer:
+          "所有成瘾性物质和行为最终都作用于VTA-伏隔核通路。毒品会直接导致多巴胺大量释放（远超过自然奖励），而糖、游戏和社交媒体则通过间接方式过度刺激这个通路。长期过度刺激会导致VTA多巴胺受体脱敏，需要越来越强的刺激才能达到同样的愉悦感——这就是耐受和成瘾的开始。",
+      },
+    ],
+    realLifeImpacts: [
+      "短视频算法通过内容多样性和不确定性持续激活VTA，让你欲罢不能",
+      "游戏中的'抽卡'机制利用VTA对随机奖励的渴望，创造类似赌博的快感",
+      "糖和高脂肪食物会过度刺激VTA，导致暴饮暴食和肥胖",
+      "点赞、评论等社交反馈会激活VTA的多巴胺释放，强化社交媒体使用行为",
+    ],
+    position: { x: 42, y: 42, width: 10, height: 10 },
+    emoji: "⚡",
+  },
+  {
+    id: "nucleus-accumbens",
+    name: "Nucleus Accumbens",
+    chineseName: "伏隔核",
+    description:
+      "伏隔核（NAc）是腹侧纹状体的一部分，位于大脑深部的基底神经节。它是VTA多巴胺投射的主要目标，也是奖励系统的核心节点。伏隔核负责编码奖励的价值、预测奖励的获得、以及将动机转化为行动。它还是'想要'（wanting）和'喜欢'（liking）分离的关键脑区。",
+    color: "#38b000",
+    glowColor: "rgba(56, 176, 0, 0.5)",
+    relatedExperiments: ["reward-circuit"],
+    faqs: [
+      {
+        question: "'想要'和'喜欢'有什么区别？",
+        answer:
+          "这是神经科学的一个重要发现。'喜欢'（liking）是实际体验到的愉悦感，由伏隔核的少数'愉悦热点'和类鸦片系统介导。'想要'（wanting）是追求奖励的动机，由多巴胺系统介导。成瘾后，你可能对某样东西'想要'但不再'喜欢'——你强迫性地追求它，但不再从中得到快乐。",
+      },
+      {
+        question: "伏隔核如何影响决策？",
+        answer:
+          "伏隔核会不断计算不同选项的预期价值，并将信号发送给前额叶皮层。当某个选项的预期价值（即时奖励×概率）远高于其他选项时，伏隔核的强烈多巴胺信号会压倒前额叶的理性分析，导致冲动决策。这就是为什么明明知道应该学习，却还是忍不住打开短视频的神经基础。",
+      },
+      {
+        question: "为什么奖励延迟会降低动力？",
+        answer:
+          "伏隔核对奖励的价值有一个'时间折扣'机制：奖励越遥远，它在伏隔核中的主观价值就越低。这是一个双曲线折扣函数——今天的100元可能等于明天的120元，但等于一年后的200元。前额叶皮层可以抵消这种折扣，但需要消耗自控力资源。",
+      },
+    ],
+    realLifeImpacts: [
+      "信用卡让消费的'痛苦'延迟，减少伏隔核对成本的感知，导致过度消费",
+      "减肥时，眼前的蛋糕（即时、确定的奖励）在伏隔核中的价值远大于几个月后的健康（延迟、不确定的奖励）",
+      "拖延症本质上是伏隔核对即时愉悦的追求压倒了前额叶对长期目标的规划",
+      "营销中的'限时优惠'利用了伏隔核对即时性奖励的偏好，制造紧迫感促进消费",
+    ],
+    position: { x: 32, y: 38, width: 12, height: 10 },
+    emoji: "🎯",
+  },
+  {
     id: "reward-system",
     name: "Reward System",
     chineseName: "奖励系统",
@@ -166,7 +236,7 @@ export const brainRegions: BrainRegion[] = [
       "大脑奖励系统主要包括腹侧被盖区（VTA）、伏隔核（NAc）和前额叶皮层，通过多巴胺作为主要神经递质。它负责激励行为、编码愉悦感、强化学习和形成习惯。",
     color: "#06ffa5",
     glowColor: "rgba(6, 255, 165, 0.5)",
-    relatedExperiments: ["time-illusion", "attention-blindspot"],
+    relatedExperiments: ["time-illusion", "attention-blindspot", "reward-circuit"],
     faqs: [
       {
         question: "为什么快乐的时光总是短暂？",

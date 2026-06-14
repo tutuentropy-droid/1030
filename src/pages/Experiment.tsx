@@ -9,6 +9,7 @@ import MemoryIllusion from "@/experiments/MemoryIllusion";
 import AttentionBlindspot from "@/experiments/AttentionBlindspot";
 import TimeIllusion from "@/experiments/TimeIllusion";
 import SensoryConflict from "@/experiments/SensoryConflict";
+import RewardCircuit from "@/experiments/RewardCircuit";
 import { useBrainMap } from "@/hooks/useBrainMap";
 import { getBrainRegionsByExperiment } from "@/data/brainRegions";
 import UnlockCelebration from "@/components/UnlockCelebration";
@@ -22,6 +23,7 @@ const experimentComponents: Record<string, React.ComponentType<{ onComplete: () 
   "attention-blindspot": AttentionBlindspot,
   "time-illusion": TimeIllusion,
   "sensory-conflict": SensoryConflict,
+  "reward-circuit": RewardCircuit,
 };
 
 export default function Experiment() {
@@ -93,6 +95,7 @@ export default function Experiment() {
                   {experiment.icon === "Eye" && <Lightbulb className="w-full h-full" />}
                   {experiment.icon === "Clock" && <Zap className="w-full h-full" />}
                   {experiment.icon === "Sparkles" && <Sparkles className="w-full h-full" />}
+                  {experiment.icon === "Gift" && <Sparkles className="w-full h-full" />}
                 </div>
               </div>
             <div>
