@@ -1,8 +1,13 @@
-import { Sparkles, ChevronDown } from "lucide-react";
+import { Sparkles, ChevronDown, Map } from "lucide-react";
+import { Link } from "react-router-dom";
 import ExperimentCard from "@/components/ExperimentCard";
 import { experiments } from "@/data/experiments";
+import { useBrainMap } from "@/hooks/useBrainMap";
 
 export default function Home() {
+  const { completionStats, isExperimentCompleted } = useBrainMap();
+  const stats = completionStats;
+
   return (
     <div className="relative min-h-screen">
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -36,19 +41,39 @@ export default function Home() {
           </p>
 
           <div
-            className="animate-slide-up"
+            className="animate-slide-up flex flex-col sm:flex-row items-center justify-center gap-4"
             style={{ animationFillMode: "both", animationDelay: "0.3s" }}
           >
             <a href="#experiments" className="btn-primary text-lg">
               开始探索
               <ChevronDown className="w-5 h-5 animate-bounce-slow" />
             </a>
+            <Link to="/brain-map" className="btn-secondary text-lg gap-2">
+              <Map className="w-5 h-5" />
+              大脑地图模式
+              {stats.unlockedRegions > 0 && (
+                <span
+                  className="w-6 h-6 rounded-full text-xs flex items-center justify-center font-bold ml-1"
+                  style={{
+                    background: "linear-gradient(135deg, #9d4edd, #00d4ff)",
+                    color: "white",
+                  }}
+                >
+                  {stats.unlockedRegions}
+                </span>
+              )}
+            </Link>
           </div>
 
           <div className="mt-20 flex justify-center gap-8 text-center animate-fade-in" style={{ animationDelay: "0.5s", animationFillMode: "both" }}>
             <div>
               <div className="text-3xl font-bold gradient-text">5</div>
               <div className="text-sm text-museum-300/60">互动实验</div>
+            </div>
+            <div className="w-px bg-white/10" />
+            <div>
+              <div className="text-3xl font-bold gradient-text">5</div>
+              <div className="text-sm text-museum-300/60">大脑区域</div>
             </div>
             <div className="w-px bg-white/10" />
             <div>

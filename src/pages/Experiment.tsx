@@ -1,6 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import { useState } from "react";
-import { ArrowLeft, RotateCcw, Lightbulb, Brain, Zap } from "lucide-react";
+import { ArrowLeft, RotateCcw, Lightbulb, Brain, Zap, Map } from "lucide-react";
 import { getExperimentById } from "@/data/experiments";
 import ExplanationCard from "@/components/ExplanationCard";
 import ColorIllusion from "@/experiments/ColorIllusion";
@@ -8,6 +8,9 @@ import MotionIllusion from "@/experiments/MotionIllusion";
 import MemoryIllusion from "@/experiments/MemoryIllusion";
 import AttentionBlindspot from "@/experiments/AttentionBlindspot";
 import TimeIllusion from "@/experiments/TimeIllusion";
+import { useBrainMap } from "@/hooks/useBrainMap";
+import { getBrainRegionsByExperiment } from "@/data/brainRegions";
+import UnlockCelebration from "@/components/UnlockCelebration";
 
 const experimentComponents: Record<string, React.ComponentType<{ onComplete: () => void }>> = {
   "color-illusion": ColorIllusion,
@@ -22,6 +25,7 @@ export default function Experiment() {
   const experiment = id ? getExperimentById(id) : undefined;
   const [gamePhase, setGamePhase] = useState<"intro" | "playing" | "result">("intro");
   const [showExplanation, setShowExplanation] = useState(false);
+  const { completeExperiment, isExperimentCompleted } = useBrainMap();
 
   if (!experiment) {
     return (
@@ -37,8 +41,13 @@ export default function Experiment() {
   }
 
   const ExperimentGame = experimentComponents[experiment.id];
+  const relatedBrainRegions = experiment ? getBrainRegionsByExperiment(experiment.id) : [];
+  const experimentDone = experiment ? isExperimentCompleted(experiment.id) : false;
 
   const handleComplete = () => {
+    if (experiment) {
+      completeExperiment(experiment.id);
+    }
     setGamePhase("result");
     setTimeout(() => {
       setShowExplanation(true);
@@ -119,12 +128,71 @@ export default function Experiment() {
           {gamePhase === "result" && (
             <div className="max-w-4xl mx-auto">
               <div className="text-center mb-12 animate-fade-in">
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6"
+                  style={{
+                    background: experimentDone
+                      ? "rgba(6, 255, 165, 0.1)"
+                      : "rgba(157, 78, 221, 0.15)",
+                    border: `1px solid ${experimentDone
+                      ? "rgba(6, 255, 165, 0.3)"
+                      : "rgba(157, 78, 221, 0.3)"}`,
+                  }}
+                >
+                  <span className="text-sm font-medium"
+                    style={{ color: experimentDone ? "#06ffa5" : "#9d4edd" }}
+                  >
+                    {experimentDone ? "✓ 已完成过" : "🎉 首次完成"}
+                  </span>
+                </div>
                 <h2 className="text-3xl font-display font-bold text-white mb-4">
                   体验完成！
                 </h2>
-                <p className="text-museum-200/70">
+                <p className="text-museum-200/70 mb-6">
                   想知道这背后的科学原理吗？继续往下看吧
                 </p>
+
+                <div className="glass-card p-5 max-w-xl mx-auto mb-8 animate-slide-up"
+                  style={{
+                    background: "linear-gradient(135deg, rgba(157, 78, 221, 0.15), rgba(0, 212, 255, 0.1))",
+                    border: "1px solid rgba(157, 78, 221, 0.2)",
+                    animationDelay: "0.1s",
+                    animationFillMode: "both",
+                  }}
+                >
+                  <div className="flex items-center gap-2 mb-4">
+                  <Map className="w-5 h-5 text-neon-purple" />
+                  <p className="text-sm text-museum-200/80 font-medium">
+                    🧠 本实验涉及的脑区
+                  </p>
+                </div>
+                <div className="flex flex-wrap justify-center gap-3">
+                  {relatedBrainRegions.map((region) => (
+                    <div
+                      key={region.id}
+                      className="flex items-center gap-2 px-4 py-2 rounded-xl"
+                      style={{
+                        background: `${region.color}15`,
+                        border: `1px solid ${region.color}30`,
+                      }}
+                    >
+                      <span className="text-xl">{region.emoji}</span>
+                      <span className="text-sm font-medium"
+                        style={{ color: region.color }}
+                      >
+                        {region.chineseName}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+                <Link
+                  to="/brain-map"
+                  className="inline-flex items-center gap-2 mt-5 text-sm font-medium hover:underline"
+                  style={{ color: "#00d4ff" }}
+                >
+                  前往大脑地图查看详情
+                  <span>→</span>
+                </Link>
+              </div>
               </div>
 
               {showExplanation && (
@@ -197,6 +265,7 @@ export default function Experiment() {
           )}
         </div>
       </div>
+      <UnlockCelebration />
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "@/pages/Home";
 import Experiment from "@/pages/Experiment";
+import BrainMapPage from "@/pages/BrainMapPage";
 import Navbar from "@/components/Navbar";
 import ParticleBackground from "@/components/ParticleBackground";
 
@@ -14,6 +15,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/experiment/:id" element={<Experiment />} />
+            <Route path="/brain-map" element={<BrainMapPage />} />
           </Routes>
         </div>
       </div>
