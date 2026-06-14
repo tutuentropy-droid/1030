@@ -1,0 +1,202 @@
+import { useParams, Link } from "react-router-dom";
+import { useState } from "react";
+import { ArrowLeft, RotateCcw, Lightbulb, Brain, Zap } from "lucide-react";
+import { getExperimentById } from "@/data/experiments";
+import ExplanationCard from "@/components/ExplanationCard";
+import ColorIllusion from "@/experiments/ColorIllusion";
+import MotionIllusion from "@/experiments/MotionIllusion";
+import MemoryIllusion from "@/experiments/MemoryIllusion";
+import AttentionBlindspot from "@/experiments/AttentionBlindspot";
+import TimeIllusion from "@/experiments/TimeIllusion";
+
+const experimentComponents: Record<string, React.ComponentType<{ onComplete: () => void }>> = {
+  "color-illusion": ColorIllusion,
+  "motion-illusion": MotionIllusion,
+  "memory-illusion": MemoryIllusion,
+  "attention-blindspot": AttentionBlindspot,
+  "time-illusion": TimeIllusion,
+};
+
+export default function Experiment() {
+  const { id } = useParams<{ id: string }>();
+  const experiment = id ? getExperimentById(id) : undefined;
+  const [gamePhase, setGamePhase] = useState<"intro" | "playing" | "result">("intro");
+  const [showExplanation, setShowExplanation] = useState(false);
+
+  if (!experiment) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-white mb-4">实验未找到</h1>
+          <Link to="/" className="btn-primary">
+            返回首页
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
+  const ExperimentGame = experimentComponents[experiment.id];
+
+  const handleComplete = () => {
+    setGamePhase("result");
+    setTimeout(() => {
+      setShowExplanation(true);
+    }, 500);
+  };
+
+  const handleRestart = () => {
+    setGamePhase("intro");
+    setShowExplanation(false);
+  };
+
+  const handleStart = () => {
+    setGamePhase("playing");
+  };
+
+  return (
+    <div className="min-h-screen pt-24 pb-16">
+      <div className="container px-4">
+        <div className="mb-8 animate-fade-in">
+          <Link
+            to="/"
+            className="inline-flex items-center gap-2 text-museum-300/70 hover:text-white transition-colors mb-4"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            返回大厅
+          </Link>
+
+          <div className="flex items-center gap-4">
+            <div
+              className="w-14 h-14 rounded-2xl flex items-center justify-center"
+              style={{
+                background: `linear-gradient(135deg, ${experiment.accentColor}40, ${experiment.accentColor}10)`,
+                boxShadow: `0 0 30px ${experiment.glowColor}`,
+              }}
+            >
+              <div className="w-7 h-7" style={{ color: experiment.accentColor }}>
+                {experiment.icon === "Palette" && <Lightbulb className="w-full h-full" />}
+                {experiment.icon === "RotateCw" && <Zap className="w-full h-full" />}
+                {experiment.icon === "Brain" && <Brain className="w-full h-full" />}
+                {experiment.icon === "Eye" && <Lightbulb className="w-full h-full" />}
+                {experiment.icon === "Clock" && <Zap className="w-full h-full" />}
+              </div>
+            </div>
+            <div>
+              <h1 className="text-3xl md:text-4xl font-display font-bold text-white">
+                {experiment.title}
+              </h1>
+              <p className="text-museum-300/70">{experiment.shortDescription}</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="mb-12">
+          {gamePhase === "intro" && (
+            <div className="glass-card p-8 md:p-12 max-w-2xl mx-auto text-center animate-fade-in">
+              <h2 className="text-2xl font-display font-bold text-white mb-4">
+                准备好开始了吗？
+              </h2>
+              <p className="text-museum-200/80 mb-8 leading-relaxed">
+                {experiment.introduction}
+              </p>
+              <p className="text-museum-300/60 text-sm mb-8">
+                {experiment.gameInstruction}
+              </p>
+              <button onClick={handleStart} className="btn-primary text-lg">
+                开始体验
+                <Zap className="w-5 h-5" />
+              </button>
+            </div>
+          )}
+
+          {gamePhase === "playing" && ExperimentGame && (
+            <div className="animate-fade-in">
+              <ExperimentGame onComplete={handleComplete} />
+            </div>
+          )}
+
+          {gamePhase === "result" && (
+            <div className="max-w-4xl mx-auto">
+              <div className="text-center mb-12 animate-fade-in">
+                <h2 className="text-3xl font-display font-bold text-white mb-4">
+                  体验完成！
+                </h2>
+                <p className="text-museum-200/70">
+                  想知道这背后的科学原理吗？继续往下看吧
+                </p>
+              </div>
+
+              {showExplanation && (
+                <div className="space-y-8">
+                  <ExplanationCard
+                    icon={<Lightbulb className="w-6 h-6" />}
+                    title="现象描述"
+                    content={experiment.phenomenon}
+                    color={experiment.accentColor}
+                    delay={0.1}
+                  />
+
+                  <ExplanationCard
+                    icon={<Brain className="w-6 h-6" />}
+                    title="神经学原理"
+                    content={experiment.neurosciencePrinciple}
+                    color={experiment.accentColor}
+                    delay={0.2}
+                  />
+
+                  <div
+                    className="glass-card p-6 animate-slide-up"
+                    style={{
+                      animationDelay: "0.3s",
+                      animationFillMode: "both",
+                    }}
+                  >
+                    <div
+                      className="w-12 h-12 rounded-xl flex items-center justify-center mb-4"
+                      style={{
+                        background: `linear-gradient(135deg, ${experiment.accentColor}30, ${experiment.accentColor}10)`,
+                        boxShadow: `0 0 20px ${experiment.accentColor}20`,
+                      }}
+                    >
+                      <Zap className="w-6 h-6" style={{ color: experiment.accentColor }} />
+                    </div>
+
+                    <h3 className="text-xl font-display font-bold text-white mb-4">
+                      现实生活例子
+                    </h3>
+
+                    <ul className="space-y-3">
+                      {experiment.realLifeExamples.map((example, index) => (
+                        <li
+                          key={index}
+                          className="flex items-start gap-3 text-museum-200/80 text-sm leading-relaxed"
+                        >
+                          <span
+                            className="w-2 h-2 rounded-full mt-2 flex-shrink-0"
+                            style={{ backgroundColor: experiment.accentColor }}
+                          />
+                          {example}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              )}
+
+              <div className="flex justify-center gap-4 mt-12">
+                <button onClick={handleRestart} className="btn-secondary gap-2">
+                  <RotateCcw className="w-4 h-4" />
+                  重新体验
+                </button>
+                <Link to="/" className="btn-primary gap-2">
+                  探索其他实验
+                </Link>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
