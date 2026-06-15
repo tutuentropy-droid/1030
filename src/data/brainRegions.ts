@@ -26,7 +26,7 @@ export const brainRegions: BrainRegion[] = [
       "海马体是大脑内侧颞叶的一个关键结构，形似海马，是记忆形成和空间导航的核心区域。它负责将短期记忆转化为长期记忆，并帮助我们在环境中定位自己。",
     color: "#ff006e",
     glowColor: "rgba(255, 0, 110, 0.5)",
-    relatedExperiments: ["memory-illusion", "dream-neuroscience"],
+    relatedExperiments: ["memory-illusion", "dream-neuroscience", "neuroscience-history"],
     faqs: [
       {
         question: "海马体损伤会怎样？",
@@ -61,7 +61,7 @@ export const brainRegions: BrainRegion[] = [
       "杏仁核是位于大脑内侧颞叶的杏仁状结构，是情绪处理的核心，特别是恐惧和焦虑的检测与反应。它在形成情绪化记忆和触发战斗-逃跑反应中起着关键作用。",
     color: "#ff5c8a",
     glowColor: "rgba(255, 92, 138, 0.5)",
-    relatedExperiments: ["time-illusion", "memory-illusion", "reward-circuit", "dream-neuroscience"],
+    relatedExperiments: ["time-illusion", "memory-illusion", "reward-circuit", "dream-neuroscience", "neuroscience-history"],
     faqs: [
       {
         question: "为什么危险时刻感觉时间变慢？",
@@ -96,7 +96,7 @@ export const brainRegions: BrainRegion[] = [
       "前额叶皮层位于大脑额叶的最前部，是人类大脑进化程度最高的区域。它负责执行功能：计划、决策、工作记忆、注意力控制、冲动抑制和社会行为的调节。",
     color: "#9d4edd",
     glowColor: "rgba(157, 78, 221, 0.5)",
-    relatedExperiments: ["attention-blindspot", "memory-illusion", "time-illusion", "reward-circuit", "dream-neuroscience"],
+    relatedExperiments: ["attention-blindspot", "memory-illusion", "time-illusion", "reward-circuit", "dream-neuroscience", "neuroscience-history"],
     faqs: [
       {
         question: "为什么我会错过眼前的大猩猩？",
@@ -131,7 +131,7 @@ export const brainRegions: BrainRegion[] = [
       "视觉皮层位于大脑枕叶，是处理视觉信息的主要区域。它分为多个层级（V1到V5），从基本的边缘检测、颜色识别到复杂的形状、运动和场景理解层层递进。",
     color: "#00d4ff",
     glowColor: "rgba(0, 212, 255, 0.5)",
-    relatedExperiments: ["color-illusion", "motion-illusion", "attention-blindspot", "dream-neuroscience"],
+    relatedExperiments: ["color-illusion", "motion-illusion", "attention-blindspot", "dream-neuroscience", "neuroscience-history"],
     faqs: [
       {
         question: "为什么我们会被视觉错觉欺骗？",
@@ -166,7 +166,7 @@ export const brainRegions: BrainRegion[] = [
       "腹侧被盖区（VTA）位于中脑，是大脑多巴胺的主要来源之一。它的多巴胺神经元会向伏隔核、前额叶皮层和其他脑区投射，构成了中脑边缘多巴胺通路。VTA的核心功能是编码'预测误差'——当现实好于预期时，多巴胺神经元会爆发式放电，从而强化导致这个好结果的行为。",
     color: "#7ae582",
     glowColor: "rgba(122, 229, 130, 0.5)",
-    relatedExperiments: ["reward-circuit"],
+    relatedExperiments: ["reward-circuit", "neuroscience-history"],
     faqs: [
       {
         question: "VTA和多巴胺有什么关系？",
@@ -201,7 +201,7 @@ export const brainRegions: BrainRegion[] = [
       "伏隔核（NAc）是腹侧纹状体的一部分，位于大脑深部的基底神经节。它是VTA多巴胺投射的主要目标，也是奖励系统的核心节点。伏隔核负责编码奖励的价值、预测奖励的获得、以及将动机转化为行动。它还是'想要'（wanting）和'喜欢'（liking）分离的关键脑区。",
     color: "#38b000",
     glowColor: "rgba(56, 176, 0, 0.5)",
-    relatedExperiments: ["reward-circuit"],
+    relatedExperiments: ["reward-circuit", "neuroscience-history"],
     faqs: [
       {
         question: "'想要'和'喜欢'有什么区别？",
@@ -376,7 +376,7 @@ export const brainRegions: BrainRegion[] = [
       "顶叶位于大脑顶部，是整合多种感官信息、构建空间认知和身体表征的核心区域。它包含躯体感觉皮层、下顶叶（IPL）和上顶叶（SPL），负责将视觉、触觉和本体感觉信息整合为统一的身体模型和空间坐标系。",
     color: "#7209b7",
     glowColor: "rgba(114, 9, 183, 0.5)",
-    relatedExperiments: ["sensory-conflict", "attention-blindspot"],
+    relatedExperiments: ["sensory-conflict", "attention-blindspot", "neuroscience-history"],
     faqs: [
       {
         question: "橡胶手错觉为什么会发生？",

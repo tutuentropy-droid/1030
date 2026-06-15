@@ -264,6 +264,57 @@ export const experiments: Experiment[] = [
     hasMultiPhase: true,
   },
   {
+    id: "neuroscience-history",
+    title: "神经科学历史实验",
+    shortDescription: "穿越百年，体验经典实验",
+    icon: "FlaskConical",
+    accentColor: "#d4a574",
+    glowColor: "rgba(212, 165, 116, 0.4)",
+    introduction:
+      "穿越时空，进入不同年代的神经科学实验室！从1902年巴甫洛夫的条件反射，到1962年斯佩里的裂脑实验，再到现代的注意力盲视和多巴胺预测误差——你将亲自体验这些改变人类认知的经典实验。在每个实验中，先猜结果，再看真相，还有「如果实验失败了会怎样」的分支体验。",
+    gameInstruction:
+      "选择一个年代进入实验室，按照指示完成互动实验。每个实验都会先让你猜测结果，然后展示真实的实验发现和背后的神经原理。完成全部四个年代的实验即可解锁。",
+    phenomenon:
+      "四个经典实验揭示了大脑运作的核心机制：1）巴甫洛夫的条件反射——中性刺激通过与重要事件反复配对获得意义，这是所有联想学习的基础；2）裂脑实验——切断胼胝体后，左右半球各自为政，左半球能说出右视野看到的东西，却对左视野的信息「视而不见」，揭示了大脑功能偏侧化；3）非注意盲视——当你专注数球时，50%的人会错过画面中央的大猩猩，证明注意力是有限资源；4）多巴胺预测误差——多巴胺编码的不是「快乐」而是「意外」，预期中的奖励不触发多巴胺，意外的奖励才让它飙升。",
+    neurosciencePrinciple:
+      "这些实验分别揭示了不同的神经原理：条件反射的基底是突触可塑性（赫布学习），反复共激活的神经元连接会被强化；裂脑实验证明大脑功能偏侧化——左半球主导语言和逻辑，右半球主导空间和整体感知，胼胝体是两半球的信息桥梁；非注意盲视说明注意力由顶叶和前额叶皮层调控，认知资源有限时信息在到达意识前就被过滤；多巴胺预测误差由腹侧被盖区（VTA）的神经元编码，实际奖励与预期奖励的差值驱动多巴胺释放，这是强化学习和成瘾的核心机制。",
+    realLifeExamples: [
+      "广告中反复将产品与愉悦画面配对，利用的就是巴甫洛夫条件反射",
+      "裂脑患者的经历提醒我们：我们感知到的「统一意识」可能是大脑整合后的幻象",
+      "开车打电话时你「看」到了路但大脑没处理——这就是非注意盲视在现实中的致命后果",
+      "短视频App的无限滚动利用多巴胺预测误差——你永远不知道下一条是什么，这种不确定性疯狂刺激多巴胺释放",
+      "恐惧症治疗后容易复发——旧的条件反射只是被压制（消退），而非根除（自发恢复）",
+      "赌博比稳定收入更让人上瘾——不可预测的奖励产生最大的预测误差和多巴胺释放",
+    ],
+    subExperiments: [
+      {
+        id: "1900-conditioning",
+        title: "条件反射实验",
+        description: "铃声如何让狗流口水？巴甫洛夫的发现",
+        brainPathway: ["amygdala", "brainstem", "hippocampus", "prefrontal-cortex"],
+      },
+      {
+        id: "1960-split-brain",
+        title: "裂脑实验",
+        description: "切断大脑桥梁后的两个独立意识",
+        brainPathway: ["prefrontal-cortex", "visual-cortex", "corpus-callosum", "prefrontal-cortex"],
+      },
+      {
+        id: "modern-attention",
+        title: "注意力实验",
+        description: "看不见的大猩猩——非注意盲视",
+        brainPathway: ["parietal-lobe", "prefrontal-cortex", "visual-cortex"],
+      },
+      {
+        id: "modern-reward",
+        title: "奖励预测实验",
+        description: "多巴胺不是快乐分子——预测误差",
+        brainPathway: ["ventral-tegmental-area", "nucleus-accumbens", "prefrontal-cortex"],
+      },
+    ],
+    hasMultiPhase: true,
+  },
+  {
     id: "cognitive-bias",
     title: "认知漏洞检测",
     shortDescription: "你的大脑有多容易被骗？",
