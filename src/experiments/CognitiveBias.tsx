@@ -61,7 +61,7 @@ interface Question {
   questionNumber: number;
 }
 
-type GameMode = "cognitive-bias" | "primitive-era";
+type GameMode = "cognitive-bias" | "primitive-era" | "story-mode";
 
 type PrimitiveCategoryType = "calorie-craving" | "instant-reward" | "group-identity" | "danger-sensitivity";
 
@@ -91,6 +91,350 @@ interface AnsweredPrimitiveQuestion {
   selectedOptionId: string;
   followedInstinct: boolean;
   category: PrimitiveCategoryType;
+}
+
+type StoryId = "overloaded-office-worker" | "reward-addicted-scroller";
+type StoryPhase = "intro" | "scene" | "reflection" | "result";
+
+interface StoryChoice {
+  id: string;
+  label: string;
+  consequence: string;
+  brainEffect: string;
+  isAdaptive: boolean;
+  nextSceneId?: string;
+}
+
+interface StoryScene {
+  id: string;
+  sceneNumber: number;
+  setting: string;
+  atmosphere: string;
+  narrative: string;
+  brainState: string;
+  brainRegion: string;
+  choices: StoryChoice[];
+}
+
+interface StoryData {
+  id: StoryId;
+  title: string;
+  subtitle: string;
+  emoji: string;
+  color: string;
+  icon: typeof Brain;
+  brainCondition: string;
+  brainConditionDescription: string;
+  scenes: StoryScene[];
+  neuroscienceLessons: string[];
+}
+
+
+
+const STORIES: Record<StoryId, StoryData> = {
+  "overloaded-office-worker": {
+    id: "overloaded-office-worker",
+    title: "前额叶超载的一天",
+    subtitle: "当你的理性中枢被榨干时……",
+    emoji: "💼",
+    color: "#3a86ff",
+    icon: Brain,
+    brainCondition: "前额叶皮层工作超载",
+    brainConditionDescription: "你的前额叶皮层（负责决策、自控、规划的脑区）已经连续高负荷运转12小时。工作记忆容量耗尽，血清素水平下降，冲动控制能力减弱。这种状态下，你更容易被认知偏差捕获，做出糟糕的决策。",
+    scenes: [
+      {
+        id: "office-scene-1",
+        sceneNumber: 1,
+        setting: "晚上9点，公司会议室",
+        atmosphere: "🌙 窗外是漆黑的夜空，会议室里只剩你一个人。电脑屏幕发出的冷光照在你疲惫的脸上。咖啡机已经是第四杯了。",
+        narrative: "你已经加班到第12个小时。老板发消息说：'明天早上8点前，把这个项目的三个方案都做出来，我要和客户开会。'你看着屏幕上密密麻麻的数据，感觉脑子像一团浆糊。",
+        brainState: "你的前额叶皮层葡萄糖水平下降了30%，工作记忆容量从7±2个信息块降到了3个。你现在的决策能力，相当于血液酒精浓度0.05%的状态——接近酒驾标准。",
+        brainRegion: "背外侧前额叶皮层（DLPFC）+ 前扣带皮层（ACC） → 活动减弱，错误检测能力下降",
+        choices: [
+          {
+            id: "a",
+            label: "咬咬牙，今晚通宵把三个方案都做完",
+            consequence: "你熬到凌晨4点，三个方案都做了但质量很差。第二天开会客户一眼就看出是仓促完成的，老板对你很失望。",
+            brainEffect: "睡眠剥夺让前额叶活动进一步下降，杏仁核活动增强20%，你变得更容易情绪化和冲动。",
+            isAdaptive: false,
+          },
+          {
+            id: "b",
+            label: "先选一个方案认真做，另外两个做简单框架，明早和老板沟通调整优先级",
+            consequence: "你11点就睡觉了，第二天早上6点起来把主要方案打磨得很精致。老板看了后说：'一个做得好的方案比三个凑数的强太多了，就用这个。'",
+            brainEffect: "充足的睡眠让前额叶功能恢复，你在做重要决策时能够调用系统2（理性分析）而不是依赖系统1（直觉冲动）。",
+            isAdaptive: true,
+          },
+          {
+            id: "c",
+            label: "直接回复老板说'做不完， deadline不合理'，然后立刻下班",
+            consequence: "老板很生气，在团队群里点名批评了你。虽然你睡了个好觉，但职场关系出现了裂痕。",
+            brainEffect: "你的杏仁核（情绪中枢）在疲惫状态下接管了决策，导致了冲动的情绪化反应。前额叶的冲动控制回路完全失灵。",
+            isAdaptive: false,
+          },
+        ],
+      },
+      {
+        id: "office-scene-2",
+        sceneNumber: 2,
+        setting: "第二天下午2点，公司食堂",
+        atmosphere: "🍔 食堂里弥漫着油炸食品的香气。你的肚子咕咕叫——早上太赶没来得及吃早饭。",
+        narrative: "你在食堂窗口徘徊。左边是健康餐：水煮鸡胸肉、西兰花、糙米饭，38元。右边是套餐：炸鸡、薯条、可乐，25元还送一个汉堡。你摸了摸口袋，这个月还剩3天，工资已经花得差不多了。",
+        brainState: "低血糖状态下，你的眶额叶皮层（价值评估中枢）对高热量食物的奖赏信号放大了50%。同时，血清素不足让你更难抵制即时满足的诱惑。",
+        brainRegion: "眶额叶皮层（OFC）+ 伏隔核（奖励中枢） → 高热量食物的多巴胺奖赏信号被放大",
+        choices: [
+          {
+            id: "a",
+            label: "当然选健康餐！虽然贵，但对身体好",
+            consequence: "你吃了健康餐，下午开会时精力充沛，思路清晰。虽然花了钱，但你为自己的自控力感到自豪。",
+            brainEffect: "你成功地用腹内侧前额叶（长远价值评估）压制了伏隔核的即时奖赏信号。这消耗了一部分认知资源，但训练了自控力。",
+            isAdaptive: true,
+          },
+          {
+            id: "b",
+            label: "炸鸡套餐太划算了！反正只是偶尔吃一次",
+            consequence: "你吃了炸鸡套餐，下午3点准时犯困，开会时差点睡着。老板以为你昨晚又通宵了。",
+            brainEffect: "高脂肪高糖食物触发了多巴胺大量释放，你的奖励中枢被'劫持’了。吃完后血糖骤升骤降，反而让你更疲惫。",
+            isAdaptive: false,
+          },
+          {
+            id: "c",
+            label: "算了，不吃了，减肥省钱一举两得",
+            consequence: "你饿着肚子开会，下午4点时已经饿得前胸贴后背，完全没法集中注意力。下班路上忍不住买了更贵的蛋糕和奶茶。",
+            brainEffect: "过度的自我克制导致'自我损耗'（ego depletion），随后你的自控力完全崩溃。这就是为什么节食减肥90%会失败。",
+            isAdaptive: false,
+          },
+        ],
+      },
+      {
+        id: "office-scene-3",
+        sceneNumber: 3,
+        setting: "晚上7点，地铁上",
+        atmosphere: "📱 拥挤的地铁里，每个人都低着头看手机。你疲惫地抓着扶手，感觉大脑像被抽空了一样。",
+        narrative: "你刷朋友圈，看到同事发了一条：'感谢老板认可！这次晋升太开心了🎉'配了一张和CEO握手的照片。你心里咯噔一下——你们是同期入职的，你一直觉得自己做得比他好。",
+        brainState: "疲劳状态下，你的社会比较回路被过度激活。腹侧被盖区（VTA）的多巴胺能神经元对'他人的成功'产生了类似'损失'的反应。",
+        brainRegion: "腹内侧前额叶（社会比较）+ 杏仁核（嫉妒情绪） → 社会痛苦和身体疼痛共享神经通路",
+        choices: [
+          {
+            id: "a",
+            label: "立刻点赞评论：'太棒了！恭喜恭喜！'真心为他高兴",
+            consequence: "你真诚地祝福了同事。他私信你说：'谢谢！其实这次项目你的方案给了我很大启发，下次有机会我们合作。'你们的关系更近了一步。",
+            brainEffect: "你主动激活了腹内侧前额叶的'共情'回路，压制了杏仁核的'嫉妒'反应。这种主动的情绪调节会让你在下次遇到类似情况时更从容。",
+            isAdaptive: true,
+          },
+          {
+            id: "b",
+            label: "假装没看见，刷过去。心里越想越气：凭什么是他？",
+            consequence: "你越想越生气，回家路上一直琢磨这件事，连晚饭都没胃口。晚上失眠到12点，反复想'我到底哪里不如他'。",
+            brainEffect: "你的杏仁核持续激活，皮质醇水平升高，导致睡眠质量下降。这种'反刍思维'（rumination）是抑郁症和焦虑症的重要诱因。",
+            isAdaptive: false,
+          },
+          {
+            id: "c",
+            label: "点赞但心里酸溜溜的。晚上和老婆吐槽：'他肯定是靠关系上去的'",
+            consequence: "你和老婆吐槽了半小时，她本来心情很好，被你说得也很烦。你发泄完感觉好了一点，但夫妻关系悄悄蒙上了一层阴影。",
+            brainEffect: "你通过'抱怨'这种方式来降低杏仁核的激活度，但代价是强化了'受害者心态'的神经回路。抱怨越多，大脑就越擅长找理由抱怨。",
+            isAdaptive: false,
+          },
+        ],
+      },
+      {
+        id: "office-scene-4",
+        sceneNumber: 4,
+        setting: "晚上10点，家里沙发上",
+        atmosphere: "🛋️ 你瘫在沙发上，电视开着但你根本没在看。手机在旁边，屏幕时不时亮一下。",
+        narrative: "你本来计划今晚学两小时Python，为转岗做准备。但是太累了——你已经连续工作了13天，没有休息过一天。手机弹出一条推送：'震惊！985毕业生毕业三年年薪百万，只因做对了这件事……'",
+        brainState: "你的前额叶已经没有足够的认知资源来做'延迟满足'的决策了。腹侧纹状体（即时奖励）和前额叶（延迟奖励）的神经博弈中，前者占据了绝对上风。",
+        brainRegion: "腹侧纹状体（即时奖励） vs 前额叶皮层（延迟满足） → 95%的概率腹侧纹状体赢",
+        choices: [
+          {
+            id: "a",
+            label: "关掉手机，打开电脑开始学Python。两个小时后再休息",
+            consequence: "你强迫自己学了两个小时，虽然效率不高，但还是学完了一整章。睡前你觉得很充实，对未来更有信心了。",
+            brainEffect: "你在'认知疲劳'的状态下依然调用前额叶完成了困难的任务。这就像在肌肉酸痛时继续锻炼——虽然痛苦，但能增强你的'自控肌肉'。",
+            isAdaptive: true,
+          },
+          {
+            id: "b",
+            label: "先休息15分钟刷会儿手机，然后再学。然后就刷到了凌晨2点……",
+            consequence: "你刷手机刷到凌晨2点，看了几百条短视频、十几篇公众号文章。睡前你觉得非常空虚，骂自己'又浪费了一晚上'，然后焦虑得睡不着。",
+            brainEffect: "短视频的'可变比率强化'（variable ratio reinforcement）机制让你的多巴胺系统'脱敏'——你需要越来越强的刺激才能获得同样的快感。这和药物成瘾的神经机制完全一样。",
+            isAdaptive: false,
+          },
+          {
+            id: "c",
+            label: "今天太累了，早点睡，明天早点起再学。然后你定了早上5点的闹钟",
+            consequence: "你11点就睡了，第二天5点准时起床。清晨的大脑特别清醒，你学了两个小时，效率是平时的3倍。你发现'早睡早起'比'熬夜硬撑'效率高太多了。",
+            brainEffect: "睡眠期间，你的海马体（记忆转化中枢）会把白天的信息转化为长期记忆。充足的睡眠还能'重置'前额叶的认知资源，让你第二天的决策质量大幅提升。",
+            isAdaptive: true,
+          },
+        ],
+      },
+    ],
+    neuroscienceLessons: [
+      "前额叶的认知资源是有限的。连续做高难度决策后，你的决策质量会显著下降——这不是意志力问题，是神经科学事实。",
+      "睡眠剥夺对决策能力的影响等同于血液酒精浓度0.05%。重要决策请在你状态最好的时候做。",
+      "自我控制就像肌肉——使用后会疲劳，但通过锻炼可以增强。不过过度使用也会导致'自我损耗'。",
+      "社会比较激活的脑区和生理疼痛完全一样。'别人的成功'对你的大脑来说就像'自己的损失'。",
+      "多巴胺的功能不是'快乐'，而是'预测快乐'。短视频利用的就是'期待'的多巴胺，而不是'满足'的多巴胺。",
+      "好的决策不是靠意志力'硬扛'，而是靠环境设计——比如把手机放到另一个房间，比靠意志力抵制刷手机要有效10倍。",
+    ],
+  },
+  "reward-addicted-scroller": {
+    id: "reward-addicted-scroller",
+    title: "短视频成瘾者的24小时",
+    subtitle: "当你的奖励系统被劫持时……",
+    emoji: "📱",
+    color: "#f72585",
+    icon: Zap,
+    brainCondition: "多巴胺奖励系统超敏化",
+    brainConditionDescription: "你的多巴胺受体（D2受体）因长期过度刺激而下调了40%。你需要越来越强的刺激才能获得同样的满足感。平静的阅读、深度的思考对你来说已经变得'无聊'——因为它们无法触发足够的多巴胺释放。这就是'享乐适应性'（hedonic adaptation）的神经基础。",
+    scenes: [
+      {
+        id: "scroller-scene-1",
+        sceneNumber: 1,
+        setting: "早上7点，你的床上",
+        atmosphere: "😴 闹钟响了第三次。你眯着眼睛摸到手机，第一件事就是打开抖音——甚至还没完全睁开眼。",
+        narrative: "你本来定了7点的闹钟，打算早起去晨跑、做早餐、背英语单词。但是现在已经8点了，你还在床上刷短视频。每一个15秒的视频都比上一个更'精彩'，你的手指无意识地向上滑动，完全停不下来。",
+        brainState: "你的腹侧被盖区（VTA）的多巴胺能神经元已经处于'超敏状态'。只要一想到刷短视频，多巴胺就开始释放，让你产生'期待感'——但这种期待永远不会被真正满足，因为下一个视频永远更'精彩'。",
+        brainRegion: "腹侧被盖区（VTA）→ 伏隔核 → 背外侧纹状体（习惯形成） → 多巴胺预测误差回路被劫持",
+        choices: [
+          {
+            id: "a",
+            label: "立刻关掉抖音，起床。把手机放到客厅，去洗漱。",
+            consequence: "你强迫自己起床，虽然前10分钟很难受，但出门晨跑后感觉整个人都清醒了。早餐后你背了30个单词，成就感满满的一天开始了。",
+            brainEffect: "你打断了多巴胺的'条件反射'回路。每次你抵制了刷手机的冲动，前额叶到伏隔核的抑制性连接就会增强一点——下次再抵制就会更容易。",
+            isAdaptive: true,
+          },
+          {
+            id: "b",
+            label: "再刷'最后10分钟'……然后就到了9点，你慌慌张张地出门上班，连早饭都没吃。",
+            consequence: "你迟到了20分钟，被领导当众批评。一整天你都昏昏沉沉，因为刷手机的'多巴胺高潮'之后必然是'多巴胺低谷'——你感觉做什么都没兴趣，工作效率极低。",
+            brainEffect: "多巴胺的'预测误差'机制被算法利用了。每个视频结束时，你的多巴胺会短暂下降，然后下一个视频的'悬念'又让它升高。这种波动会让你的多巴胺系统'脱敏'，你需要越来越强的刺激才能感觉'正常'。",
+            isAdaptive: false,
+          },
+          {
+            id: "c",
+            label: "反正已经迟到了，干脆请假在家。刷个够！",
+            consequence: "你刷了一整天，从抖音到小红书到B站，再刷回来。晚上12点你放下手机，感觉眼睛干涩、头疼欲裂，心里无比空虚——你甚至想不起来今天都看了什么。",
+            brainEffect: "连续12小时的多巴胺刺激会让你的D2受体进一步下调。你会发现，以前觉得有趣的事情（看书、和朋友聊天、运动）现在都变得'没意思'了——因为它们无法触发足够的多巴胺。",
+            isAdaptive: false,
+          },
+        ],
+      },
+      {
+        id: "scroller-scene-2",
+        sceneNumber: 2,
+        setting: "下午3点，公司会议室",
+        atmosphere: "📊 老板在上面讲季度业绩，PPT一页一页翻着。你坐在最后一排，手机在口袋里震动了一下。",
+        narrative: "老板正在讲一个很重要的新项目，和你部门直接相关。但是你的手已经不自觉地伸向了口袋。抖音的推送图标在你脑海里闪啊闪——你感觉如果不看一眼，浑身都不舒服。",
+        brainState: "你的背外侧纹状体已经形成了'无聊→刷手机'的自动化习惯回路。这种'习惯记忆'是非常牢固的，因为它存储在大脑的'程序记忆'系统中——和骑自行车、打字是同一个系统。",
+        brainRegion: "背外侧纹状体（习惯系统） vs 前额叶（控制系统） → 当你无聊时，习惯系统自动接管",
+        choices: [
+          {
+            id: "a",
+            label: "把手机调到静音，放回口袋。认真听老板讲话，做笔记。",
+            consequence: "你认真听完了整个会议，发现这个新项目里有一个正好适合你的机会。会后你主动找老板沟通，拿到了项目的核心模块。",
+            brainEffect: "你用前额叶的'控制系统'压制了纹状体的'习惯系统'。每次这样做，你都在弱化'无聊→刷手机'的神经连接，强化'无聊→专注'的连接。",
+            isAdaptive: true,
+          },
+          {
+            id: "b",
+            label: "偷偷拿出手机，刷5分钟就好。结果一刷就是40分钟，抬头时会议已经结束了。",
+            consequence: "散会时老板特意过来问你：'刚才说的你都听清了吧？下周给我你的想法。'你根本不知道他说了什么，只能硬着头皮说'听清了'。整个周末你都在焦虑这件事。",
+            brainEffect: "每次你在无聊时刷手机，都在强化'无聊→刷手机'的神经通路。这个回路越用越强，最后你会发现：只要一坐下来，手就自动伸向手机——完全不需要思考。",
+            isAdaptive: false,
+          },
+          {
+            id: "c",
+            label: "假装去厕所，在厕所里刷20分钟。",
+            consequence: "你在厕所里刷了20分钟，回来时会议已经到了问答环节。老板问：'大家还有什么问题吗？'没人说话，他看向你：'你呢，有什么想法？'你支支吾吾，一个字也说不出来。",
+            brainEffect: "你用'逃避'的方式来应对'无聊'这种轻微的负面情绪。长期来看，这会让你的'情绪耐受度'越来越低——你将无法忍受任何轻微的不适、无聊、焦虑。",
+            isAdaptive: false,
+          },
+        ],
+      },
+      {
+        id: "scroller-scene-3",
+        sceneNumber: 3,
+        setting: "晚上8点，你的出租屋",
+        atmosphere: "🍜 你刚吃完外卖，电脑开着，是你上周开始看的公开课——《行为经济学》。你还买了配套的书，翻了前三章。",
+        narrative: "你本来计划今晚学两小时公开课，下周要考证。但是你坐在电脑前，看着满屏的公式，心里只有一个念头：'好无聊啊……先刷5分钟抖音放松一下，然后再学。'",
+        brainState: "你的多巴胺系统已经'脱敏'了。学习这种'延迟满足'的行为，多巴胺释放是缓慢而持续的——但你现在需要的是'即时、大量'的多巴胺释放。就像一个吸毒者，普通的快乐已经满足不了他了。",
+        brainRegion: "腹内侧前额叶（长远价值评估） vs 腹侧纹状体（即时奖励） → 多巴胺脱敏让长远价值的权重下降",
+        choices: [
+          {
+            id: "a",
+            label: "把手机放到另一个房间，强迫自己学10分钟。如果10分钟后还是不想学，就休息。",
+            consequence: "你学了10分钟，发现其实也没那么难。进入状态后你一口气学了两个小时，做了满满三页笔记。睡前你觉得'今天没有白过'。",
+            brainEffect: "你用'5分钟启动法'绕过了多巴胺的'门槛'。一旦你开始做困难的事情，前额叶的'认知控制'回路就会接管。学习产生的'持续多巴胺'虽然不强烈，但更持久，也更健康。",
+            isAdaptive: true,
+          },
+          {
+            id: "b",
+            label: "先刷5分钟抖音'放松'一下，然后就开始学。然后就刷到了凌晨1点……",
+            consequence: "你刷到凌晨1点，看了几百条视频。睡前你发誓'明天一定开始学习'，但你已经发过100次同样的誓了。你看着还没翻开的书，觉得自己'没救了'。",
+            brainEffect: "抖音的算法比任何神经科学家都更懂如何操纵你的多巴胺系统。它会根据你的观看时长、点赞、评论实时调整内容，让你的多巴胺维持在'刚好不满足但又足够期待'的状态——这和老虎机的原理完全一样。",
+            isAdaptive: false,
+          },
+          {
+            id: "c",
+            label: "今天不想学，看个电影吧。选一个一直想看的高分电影。",
+            consequence: "你看了一部两个小时的高分电影，看完后觉得很震撼，引发了很多思考。你发现'被动输入高质量内容'也比'被动刷垃圾内容'强太多了。",
+            brainEffect: "看电影也会触发多巴胺释放，但它是'叙事驱动'的，而不是'间歇性强化'的。你不会'脱敏'，反而会因为深度内容的满足感，减少对即时刺激的渴望。",
+            isAdaptive: true,
+          },
+        ],
+      },
+      {
+        id: "scroller-scene-4",
+        sceneNumber: 4,
+        setting: "凌晨1点，你的床上",
+        atmosphere: "🌙 又是凌晨1点。你刷完最后一个视频，放下手机，盯着漆黑的天花板。你明明很累，但就是睡不着——大脑还处于兴奋状态。",
+        narrative: "你又熬夜了。你刷到的最后一个视频是'30天改变自己计划'，看完后你热血沸腾，立刻在购物车加了瑜伽垫、哑铃、英文原著、钢笔字帖。然后你又刷到一个'当代年轻人的困境'的视频，又开始emo，觉得自己'这辈子就这样了'。",
+        brainState: "你的大脑在凌晨1点处于'低前额叶活动、高情绪活动'的状态。前额叶的'理性判断'能力减弱，杏仁核的'情绪反应'增强。这就是为什么你总是在深夜做冲动的决定，然后第二天早上后悔。",
+        brainRegion: "前额叶活动减弱 + 杏仁核活动增强 + 血清素水平降低 → 情绪化决策的完美配方",
+        choices: [
+          {
+            id: "a",
+            label: "清空购物车，放下手机，深呼吸100次，睡觉。",
+            consequence: "你清空了购物车，做了100次深呼吸，很快就睡着了。第二天早上你神清气爽，为自己昨晚的'清醒'感到骄傲。你做了一个真正的'改变计划'，虽然比抖音上的'30天改变自己'要朴素，但更可行。",
+            brainEffect: "深呼吸激活了迷走神经，降低了杏仁核的活动，让前额叶重新'掌权'。清空购物车的行为打破了'冲动消费'的多巴胺循环，你用行动告诉大脑：'我才是主人，不是你。'",
+            isAdaptive: true,
+          },
+          {
+            id: "b",
+            label: "一不做二不休，直接下单！不就是几千块钱吗，投资自己！",
+            consequence: "你下单了所有东西，花了3000多。第二天早上起来你就后悔了。瑜伽垫至今还在墙角积灰，英文原著翻了两页就看不下去了。你看着信用卡账单，觉得自己太蠢了。",
+            brainEffect: '深夜的多巴胺+杏仁核激活让你做出了冲动消费的决定。"购物疗法"（retail therapy）确实能短暂提升情绪，但随之而来的是更强的内疚感和焦虑感——然后你又需要更多的购物来缓解，形成恶性循环。',
+            isAdaptive: false,
+          },
+          {
+            id: "c",
+            label: "越想越emo，起来喝一罐啤酒，再刷会儿'治愈'视频。",
+            consequence: "你喝了啤酒，刷了很多'治愈''励志'视频，感觉好了一点。但凌晨3点才睡着，第二天上班迟到，昏昏沉沉一整天。你在恶性循环里越陷越深。",
+            brainEffect: "酒精会进一步抑制前额叶功能，同时激活多巴胺系统——相当于'火上浇油'。用'治愈视频'来缓解'刷太多视频的空虚'，就像用更多的毒品来缓解毒品成瘾的戒断反应。",
+            isAdaptive: false,
+          },
+        ],
+      },
+    ],
+    neuroscienceLessons: [
+      "多巴胺的核心功能不是'快乐'，而是'动机'。它让你'想要'（wanting），但不保证你'喜欢'（liking）。短视频让你'想要'一直刷，但你几乎不会'喜欢'刷完后的感觉。",
+      "可变比率强化（variable ratio reinforcement）是最容易成瘾的奖励机制——你永远不知道下一个视频会不会'精彩'，这和老虎机的原理完全一样。",
+      "多巴胺脱敏（dopamine desensitization）是成瘾的神经基础。长期过度刺激后，你的多巴胺受体会下调，你需要越来越强的刺激才能获得同样的感觉。",
+      "习惯形成的神经通路：前额叶（目标导向）→ 纹状体（习惯）。当行为变成习惯后，你不再需要'思考'就会自动执行——这就是'无意识刷手机'的神经机制。",
+      "延迟满足的神经基础：前额叶皮层能够'想象未来的奖励'，从而压制腹侧纹状体对即时奖励的渴望。但这需要消耗认知资源，而且在疲劳状态下会失效。",
+      "打破多巴胺成瘾的关键不是'靠意志力硬扛'，而是'重新设计环境'——把手机放到另一个房间、删除APP、设置屏幕使用时间，这些都比靠意志力有效得多。",
+    ],
+  },
+};
+
+interface AnsweredStoryQuestion {
+  sceneId: string;
+  choiceId: string;
+  isAdaptive: boolean;
+  storyId: StoryId;
 }
 
 const PRIMITIVE_CATEGORY_META: Record<PrimitiveCategoryType, {
@@ -910,11 +1254,33 @@ export default function CognitiveBias({
 
   const [completed, setCompleted] = useState(false);
 
+  const [selectedStoryId, setSelectedStoryId] = useState<StoryId | null>(null);
+  const [storyPhase, setStoryPhase] = useState<StoryPhase>("intro");
+  const [currentSceneIndex, setCurrentSceneIndex] = useState(0);
+  const [selectedStoryChoice, setSelectedStoryChoice] = useState<string | null>(null);
+  const [showStoryReflection, setShowStoryReflection] = useState(false);
+  const [answeredStoryQuestions, setAnsweredStoryQuestions] = useState<AnsweredStoryQuestion[]>([]);
+
   const subList = subExperiments ?? [];
 
   const isPrimitive = gameMode === "primitive-era";
+  const isStory = gameMode === "story-mode";
   const activeQuestions = isPrimitive ? PRIMITIVE_QUESTIONS : QUESTIONS;
   const activeTotalQuestions = activeQuestions.length;
+
+  const currentStory = selectedStoryId ? STORIES[selectedStoryId] : null;
+  const currentScene = currentStory ? currentStory.scenes[currentSceneIndex] : null;
+  const totalStoryScenes = currentStory ? currentStory.scenes.length : 0;
+  const storyProgress = currentStory
+    ? Math.min(
+        Math.floor(
+          ((currentSceneIndex + (showStoryReflection ? 1 : 0)) /
+            totalStoryScenes) *
+            100
+        ),
+        100
+      )
+    : 0;
 
   const currentQuestion = !isPrimitive ? QUESTIONS[currentQuestionIdx] : null;
   const currentPQuestion = isPrimitive ? PRIMITIVE_QUESTIONS[currentQuestionIdx] : null;
@@ -1022,6 +1388,115 @@ export default function CognitiveBias({
     if (completed) return;
     setCompleted(true);
     onComplete();
+  };
+
+  const startStory = (storyId: StoryId) => {
+    setSelectedStoryId(storyId);
+    setGameMode("story-mode");
+    setPhase("playing");
+    setStoryPhase("intro");
+    setCurrentSceneIndex(0);
+    setSelectedStoryChoice(null);
+    setShowStoryReflection(false);
+    setAnsweredStoryQuestions([]);
+    setCompleted(false);
+  };
+
+  const startStoryScene = () => {
+    setStoryPhase("scene");
+  };
+
+  const selectStoryChoice = (choiceId: string) => {
+    if (showStoryReflection) return;
+    setSelectedStoryChoice(choiceId);
+  };
+
+  const confirmStoryChoice = () => {
+    if (!selectedStoryChoice || !currentScene || !currentStory) return;
+
+    const selectedChoice = currentScene.choices.find(
+      (c) => c.id === selectedStoryChoice
+    );
+    const isAdaptive = selectedChoice?.isAdaptive ?? false;
+
+    setAnsweredStoryQuestions((prev) => [
+      ...prev,
+      {
+        sceneId: currentScene.id,
+        choiceId: selectedStoryChoice,
+        isAdaptive,
+        storyId: currentStory.id,
+      },
+    ]);
+
+    setShowStoryReflection(true);
+  };
+
+  const nextStoryScene = () => {
+    if (currentSceneIndex < totalStoryScenes - 1) {
+      setCurrentSceneIndex((prev) => prev + 1);
+      setSelectedStoryChoice(null);
+      setShowStoryReflection(false);
+    } else {
+      setStoryPhase("result");
+      setPhase("result");
+    }
+  };
+
+  const exitStory = () => {
+    setPhase("intro");
+    setSelectedStoryId(null);
+    setGameMode("cognitive-bias");
+  };
+
+  const storyStats = useMemo(() => {
+    if (!currentStory) return null;
+
+    const totalAdaptive = answeredStoryQuestions.filter(
+      (q) => q.isAdaptive
+    ).length;
+    const totalScenes = answeredStoryQuestions.length;
+    const adaptiveRate = totalScenes > 0 ? totalAdaptive / totalScenes : 0;
+
+    return {
+      totalAdaptive,
+      totalScenes,
+      adaptiveRate,
+    };
+  }, [answeredStoryQuestions, currentStory]);
+
+  const getStoryResultLevel = (rate: number) => {
+    if (rate >= 0.75)
+      return {
+        label: "脑控大师",
+        color: "#06ffa5",
+        emoji: "🧠",
+        description:
+          "你完全掌控了自己的大脑。即使在多巴胺被劫持、前额叶超载的状态下，你依然能做出理性决策。你了解大脑的弱点，也知道如何通过环境设计和习惯养成来保护自己。",
+      };
+    if (rate >= 0.5)
+      return {
+        label: "觉醒者",
+        color: "#00d4ff",
+        emoji: "💡",
+        description:
+          "你已经开始觉醒。你知道大脑的神经机制在影响你的决策，也能在关键时刻调用理性。但你仍然会被原始本能和多巴胺劫持——这不是你的错，这是所有人类的共同弱点。继续练习，你会越来越强。",
+      };
+    if (rate >= 0.25)
+      return {
+        label: "梦游者",
+        color: "#ffbe0b",
+        emoji: "😴",
+        description:
+          "你大多数时候处于'自动导航'状态。你的大脑被原始本能和外部算法（短视频、广告、社交媒体）操控着，你以为是'自己的决定'，其实只是神经回路的条件反射。但好消息是：你已经开始看到这一切了——看见就是改变的开始。",
+      };
+    return {
+      label: "被劫持者",
+      color: "#e63946",
+      emoji: "🫧",
+      description:
+        "你的大脑几乎完全被劫持了。多巴胺系统和原始本能替你做了所有重要决定。你刷手机刷到凌晨、买不需要的东西、吃垃圾食品、熬夜——你知道这些对你不好，但你'控制不住自己'。但请不要自责：这不是意志力问题，是神经科学问题。了解这些机制，是夺回控制权的第一步。",
+    };
   };
 
   const biasStats = useMemo(() => {
@@ -1441,6 +1916,70 @@ export default function CognitiveBias({
                   <span>4类本能 · 12道生存抉择 · 进化错位报告</span>
                 </div>
               </button>
+            </div>
+
+            <div className="mb-4">
+              <p className="text-sm font-bold text-white mb-4 flex items-center justify-center gap-2">
+                <Sparkles className="w-4 h-4" style={{ color: "#f72585" }} />
+                剧情式学习 · 沉浸式体验
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl mx-auto">
+                <button
+                  onClick={() => startStory("overloaded-office-worker")}
+                  className="p-6 rounded-2xl text-left transition-all hover:scale-[1.02] group"
+                  style={{
+                    background: "linear-gradient(135deg, rgba(58, 134, 255, 0.12), rgba(247, 37, 133, 0.08))",
+                    border: "1px solid rgba(58, 134, 255, 0.3)",
+                  }}
+                >
+                  <div
+                    className="w-14 h-14 rounded-xl flex items-center justify-center mb-4"
+                    style={{
+                      background: "linear-gradient(135deg, rgba(58, 134, 255, 0.25), rgba(247, 37, 133, 0.2))",
+                    }}
+                  >
+                    <Brain className="w-7 h-7" style={{ color: "#3a86ff" }} />
+                  </div>
+                  <h4 className="text-lg font-bold text-white mb-2">
+                    💼 前额叶超载的上班族
+                  </h4>
+                  <p className="text-sm text-museum-200/70 mb-4 leading-relaxed">
+                    你今天穿越成一位<span className="font-bold" style={{ color: "#3a86ff" }}>前额叶工作超载</span>的上班族。
+                    在加班、低血糖、社会比较、认知疲劳中，体验大脑如何影响你的每一个决策。
+                  </p>
+                  <div className="flex items-center gap-2 text-xs text-museum-300/50">
+                    <span>4个关键场景 · 神经科学实时解读</span>
+                  </div>
+                </button>
+
+                <button
+                  onClick={() => startStory("reward-addicted-scroller")}
+                  className="p-6 rounded-2xl text-left transition-all hover:scale-[1.02] group"
+                  style={{
+                    background: "linear-gradient(135deg, rgba(247, 37, 133, 0.12), rgba(114, 9, 183, 0.08))",
+                    border: "1px solid rgba(247, 37, 133, 0.3)",
+                  }}
+                >
+                  <div
+                    className="w-14 h-14 rounded-xl flex items-center justify-center mb-4"
+                    style={{
+                      background: "linear-gradient(135deg, rgba(247, 37, 133, 0.25), rgba(114, 9, 183, 0.2))",
+                    }}
+                  >
+                    <Zap className="w-7 h-7" style={{ color: "#f72585" }} />
+                  </div>
+                  <h4 className="text-lg font-bold text-white mb-2">
+                    📱 短视频成瘾的24小时
+                  </h4>
+                  <p className="text-sm text-museum-200/70 mb-4 leading-relaxed">
+                    你是一位<span className="font-bold" style={{ color: "#f72585" }}>奖励系统异常活跃</span>的短视频用户。
+                    在起床、开会、学习、深夜emo中，体验多巴胺如何被算法精准劫持。
+                  </p>
+                  <div className="flex items-center gap-2 text-xs text-museum-300/50">
+                    <span>4个关键场景 · 多巴胺机制深度解析</span>
+                  </div>
+                </button>
+              </div>
             </div>
 
             <div
@@ -1997,7 +2536,632 @@ export default function CognitiveBias({
           </div>
         )}
 
-        {phase === "result" && !isPrimitive && (
+        {phase === "playing" && isStory && currentStory && (
+          <div className="animate-fade-in">
+            {storyPhase === "intro" && (
+              <div className="text-center">
+                <div
+                  className="w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6"
+                  style={{
+                    background: `linear-gradient(135deg, ${currentStory.color}30, ${currentStory.color}15)`,
+                    boxShadow: `0 0 40px ${currentStory.color}40`,
+                  }}
+                >
+                  <span className="text-4xl">{currentStory.emoji}</span>
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-3">
+                  {currentStory.title}
+                </h3>
+                <p className="text-museum-200/70 mb-6 max-w-xl mx-auto">
+                  {currentStory.subtitle}
+                </p>
+
+                <div
+                  className="p-6 rounded-2xl mb-8 max-w-xl mx-auto text-left"
+                  style={{
+                    background: `${currentStory.color}10`,
+                    border: `1px solid ${currentStory.color}30`,
+                  }}
+                >
+                  <div className="flex items-center gap-3 mb-4">
+                    <div
+                      className="w-10 h-10 rounded-xl flex items-center justify-center"
+                      style={{ background: `${currentStory.color}20` }}
+                    >
+                      <Brain className="w-5 h-5" style={{ color: currentStory.color }} />
+                    </div>
+                    <div>
+                      <p className="text-sm font-bold" style={{ color: currentStory.color }}>
+                        🧪 你今天的脑状态
+                      </p>
+                      <p className="text-xs text-museum-300/50">
+                        {currentStory.brainCondition}
+                      </p>
+                    </div>
+                  </div>
+                  <p className="text-sm text-museum-200/80 leading-relaxed">
+                    {currentStory.brainConditionDescription}
+                  </p>
+                </div>
+
+                <div
+                  className="p-4 rounded-xl mb-8 max-w-xl mx-auto text-left"
+                  style={{
+                    background: "rgba(251, 86, 7, 0.06)",
+                    border: "1px solid rgba(251, 86, 7, 0.2)",
+                  }}
+                >
+                  <div className="flex items-center gap-2 mb-2">
+                    <AlertTriangle className="w-4 h-4" style={{ color: "#fb5607" }} />
+                    <span className="text-sm font-bold text-white">
+                      剧情提示
+                    </span>
+                  </div>
+                  <p className="text-sm text-museum-200/70 leading-relaxed">
+                    你将经历 <span className="font-bold" style={{ color: "#fb5607" }}>{totalStoryScenes}个</span> 关键场景。
+                    在每个场景中，你需要做出选择。每次选择后，你会看到：
+                    <span className="font-bold text-white"> 剧情后果</span>、
+                    <span className="font-bold text-white"> 脑科学解读</span>、
+                    以及<span className="font-bold text-white"> 神经机制分析</span>。
+                    请试着<span className="font-bold text-white">代入角色</span>，
+                    感受在这种脑状态下，你会如何做决策。
+                  </p>
+                </div>
+
+                <button onClick={startStoryScene} className="btn-primary">
+                  进入剧情
+                  <ChevronRight className="w-4 h-4" />
+                </button>
+              </div>
+            )}
+
+            {storyPhase === "scene" && currentScene && (
+              <div>
+                <div className="flex items-center justify-between mb-6">
+                  <div className="flex items-center gap-3">
+                    <button
+                      onClick={exitStory}
+                      className="w-10 h-10 rounded-xl flex items-center justify-center hover:bg-white/10 transition-colors"
+                      style={{ border: "1px solid rgba(255,255,255,0.1)" }}
+                    >
+                      <ArrowLeft className="w-5 h-5 text-museum-300/60" />
+                    </button>
+                    <div
+                      className="w-12 h-12 rounded-xl flex items-center justify-center"
+                      style={{
+                        background: `${currentStory.color}20`,
+                        border: `1px solid ${currentStory.color}40`,
+                      }}
+                    >
+                      <span className="text-2xl">{currentStory.emoji}</span>
+                    </div>
+                    <div>
+                      <p className="text-xs text-museum-300/60 mb-0.5">
+                        场景 {currentScene.sceneNumber} / {totalStoryScenes}
+                      </p>
+                      <p
+                        className="text-sm font-bold"
+                        style={{ color: currentStory.color }}
+                      >
+                        {currentScene.setting}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2 text-xs">
+                    <span className="text-museum-300/50">理性决策</span>
+                    <span
+                      className="font-bold text-lg"
+                      style={{
+                        color:
+                          answeredStoryQuestions.filter((q) => q.isAdaptive)
+                            .length > 0
+                            ? "#06ffa5"
+                            : "#e63946",
+                      }}
+                    >
+                      {
+                        answeredStoryQuestions.filter((q) => q.isAdaptive)
+                          .length
+                      }
+                    </span>
+                    <span className="text-museum-300/50">次</span>
+                  </div>
+                </div>
+
+                <div className="w-full h-1.5 bg-museum-800 rounded-full overflow-hidden mb-8">
+                  <div
+                    className="h-full transition-all duration-500"
+                    style={{
+                      width: `${storyProgress}%`,
+                      background: `linear-gradient(90deg, ${currentStory.color}, #7209b7)`,
+                    }}
+                  />
+                </div>
+
+                <div
+                  className="p-4 rounded-xl mb-6"
+                  style={{
+                    background: `${currentStory.color}08`,
+                    border: `1px solid ${currentStory.color}20`,
+                  }}
+                >
+                  <p className="text-sm italic text-museum-200/60 leading-relaxed">
+                    {currentScene.atmosphere}
+                  </p>
+                </div>
+
+                <div className="mb-6">
+                  <h4 className="text-lg md:text-xl font-bold text-white leading-relaxed mb-4">
+                    {currentScene.narrative}
+                  </h4>
+                </div>
+
+                <div
+                  className="p-4 rounded-xl mb-8"
+                  style={{
+                    background: "rgba(58, 134, 255, 0.06)",
+                    border: "1px solid rgba(58, 134, 255, 0.2)",
+                  }}
+                >
+                  <div className="flex items-center gap-2 mb-2">
+                    <Brain className="w-4 h-4" style={{ color: "#3a86ff" }} />
+                    <span
+                      className="text-xs font-bold"
+                      style={{ color: "#3a86ff" }}
+                    >
+                      🔬 此刻你的大脑
+                    </span>
+                  </div>
+                  <p className="text-sm text-museum-200/80 leading-relaxed mb-2">
+                    {currentScene.brainState}
+                  </p>
+                  <p className="text-xs text-museum-300/50">
+                    🧠 {currentScene.brainRegion}
+                  </p>
+                </div>
+
+                {!showStoryReflection ? (
+                  <div>
+                    <div className="space-y-3 mb-8">
+                      {currentScene.choices.map((opt, idx) => {
+                        const isSelected = selectedStoryChoice === opt.id;
+                        return (
+                          <button
+                            key={opt.id}
+                            onClick={() => selectStoryChoice(opt.id)}
+                            className={`w-full p-5 rounded-2xl text-left transition-all ${
+                              isSelected
+                                ? "scale-[1.01]"
+                                : "hover:scale-[1.005]"
+                            }`}
+                            style={{
+                              background: isSelected
+                                ? `linear-gradient(135deg, ${currentStory.color}30, ${currentStory.color}15)`
+                                : "rgba(255, 255, 255, 0.04)",
+                              border: isSelected
+                                ? `2px solid ${currentStory.color}`
+                                : "1px solid rgba(255, 255, 255, 0.12)",
+                              boxShadow: isSelected
+                                ? `0 0 25px ${currentStory.color}40`
+                                : "none",
+                            }}
+                          >
+                            <div className="flex items-center gap-3">
+                              <div
+                                className={`w-7 h-7 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0 transition-all ${
+                                  isSelected
+                                    ? "text-white"
+                                    : "text-museum-300/60"
+                                }`}
+                                style={{
+                                  background: isSelected
+                                    ? `linear-gradient(135deg, ${currentStory.color}, ${currentStory.color}cc)`
+                                    : "rgba(255, 255, 255, 0.08)",
+                                }}
+                              >
+                                {String.fromCharCode(65 + idx)}
+                              </div>
+                              <p
+                                className={`text-sm md:text-base leading-relaxed ${
+                                  isSelected
+                                    ? "text-white font-medium"
+                                    : "text-museum-200/85"
+                                }`}
+                              >
+                                {opt.label}
+                              </p>
+                            </div>
+                          </button>
+                        );
+                      })}
+                    </div>
+
+                    <div className="flex justify-center">
+                      <button
+                        onClick={confirmStoryChoice}
+                        disabled={!selectedStoryChoice}
+                        className="btn-primary disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100"
+                      >
+                        做出选择
+                        <ChevronRight className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="animate-fade-in">
+                    {(() => {
+                      const selectedChoice = currentScene.choices.find(
+                        (c) => c.id === selectedStoryChoice
+                      );
+                      const isAdaptive = selectedChoice?.isAdaptive ?? false;
+
+                      return (
+                        <div>
+                          <div
+                            className="p-6 rounded-2xl mb-6"
+                            style={{
+                              background: isAdaptive
+                                ? "linear-gradient(135deg, rgba(6, 255, 165, 0.15), rgba(0, 212, 255, 0.08))"
+                                : `linear-gradient(135deg, ${currentStory.color}18, ${currentStory.color}08)`,
+                              border: isAdaptive
+                                ? "1px solid rgba(6, 255, 165, 0.4)"
+                                : `1px solid ${currentStory.color}50`,
+                              boxShadow: isAdaptive
+                                ? "0 0 30px rgba(6, 255, 165, 0.15)"
+                                : `0 0 30px ${currentStory.color}25`,
+                            }}
+                          >
+                            <div className="flex items-center gap-3 mb-4">
+                              {isAdaptive ? (
+                                <div
+                                  className="w-12 h-12 rounded-xl flex items-center justify-center"
+                                  style={{ background: "rgba(6, 255, 165, 0.3)" }}
+                                >
+                                  <Brain className="w-6 h-6 text-neon-green" />
+                                </div>
+                              ) : (
+                                <div
+                                  className="w-12 h-12 rounded-xl flex items-center justify-center"
+                                  style={{ background: `${currentStory.color}30` }}
+                                >
+                                  <Zap
+                                    className="w-6 h-6"
+                                    style={{ color: currentStory.color }}
+                                  />
+                                </div>
+                              )}
+                              <div>
+                                <p
+                                  className="text-xl font-bold"
+                                  style={{
+                                    color: isAdaptive ? "#06ffa5" : currentStory.color,
+                                  }}
+                                >
+                                  {isAdaptive
+                                    ? "🧠 你做出了理性决策！"
+                                    : "⚡ 大脑自动导航模式"}
+                                </p>
+                                <p className="text-sm text-museum-200/70">
+                                  {isAdaptive
+                                    ? "你成功调用了前额叶，压制了原始本能和多巴胺冲动"
+                                    : "你的大脑被神经回路自动接管了——这不是你的错，是神经科学"}
+                                </p>
+                              </div>
+                            </div>
+
+                            <div className="space-y-3 text-sm">
+                              <div>
+                                <span className="text-museum-300/50">你的选择：</span>
+                                <span
+                                  className={
+                                    isAdaptive
+                                      ? "text-neon-green ml-1"
+                                      : "ml-1"
+                                  }
+                                  style={
+                                    !isAdaptive
+                                      ? { color: currentStory.color }
+                                      : undefined
+                                  }
+                                >
+                                  {String.fromCharCode(
+                                    65 +
+                                      currentScene.choices.findIndex(
+                                        (o) => o.id === selectedStoryChoice
+                                      )
+                                  )}
+                                  . {selectedChoice?.label}
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div
+                            className="p-6 rounded-2xl mb-4"
+                            style={{
+                              background: "rgba(251, 86, 7, 0.06)",
+                              border: "1px solid rgba(251, 86, 7, 0.25)",
+                            }}
+                          >
+                            <div className="flex items-center gap-3 mb-4">
+                              <div
+                                className="w-10 h-10 rounded-xl flex items-center justify-center"
+                                style={{ background: "rgba(251, 86, 7, 0.15)" }}
+                              >
+                                <Sparkles
+                                  className="w-5 h-5"
+                                  style={{ color: "#fb5607" }}
+                                />
+                              </div>
+                              <div>
+                                <p
+                                  className="text-sm font-bold"
+                                  style={{ color: "#fb5607" }}
+                                >
+                                  📖 剧情后果
+                                </p>
+                              </div>
+                            </div>
+                            <p className="text-sm text-museum-200/85 leading-relaxed">
+                              {selectedChoice?.consequence}
+                            </p>
+                          </div>
+
+                          <div
+                            className="p-6 rounded-2xl mb-4"
+                            style={{
+                              background: "rgba(58, 134, 255, 0.06)",
+                              border: "1px solid rgba(58, 134, 255, 0.25)",
+                            }}
+                          >
+                            <div className="flex items-center gap-3 mb-4">
+                              <div
+                                className="w-10 h-10 rounded-xl flex items-center justify-center"
+                                style={{ background: "rgba(58, 134, 255, 0.15)" }}
+                              >
+                                <Brain
+                                  className="w-5 h-5"
+                                  style={{ color: "#3a86ff" }}
+                                />
+                              </div>
+                              <div>
+                                <p
+                                  className="text-sm font-bold"
+                                  style={{ color: "#3a86ff" }}
+                                >
+                                  🔬 脑科学解读
+                                </p>
+                              </div>
+                            </div>
+                            <p className="text-sm text-museum-200/85 leading-relaxed">
+                              {selectedChoice?.brainEffect}
+                            </p>
+                          </div>
+
+                          <div className="flex justify-center">
+                            <button onClick={nextStoryScene} className="btn-primary">
+                              {currentSceneIndex < totalStoryScenes - 1
+                                ? "下一个场景"
+                                : "查看你的脑状态报告"}
+                              <ChevronRight className="w-4 h-4" />
+                            </button>
+                          </div>
+                        </div>
+                      );
+                    })()}
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        )}
+
+        {phase === "result" && isStory && currentStory && storyStats && (
+          <div className="animate-fade-in">
+            <div className="text-center mb-8">
+              {(() => {
+                const resultLevel = getStoryResultLevel(storyStats.adaptiveRate);
+                return (
+                  <>
+                    <div
+                      className="w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6 animate-pulse-glow"
+                      style={{
+                        background: `linear-gradient(135deg, ${resultLevel.color}30, ${currentStory.color}20)`,
+                        boxShadow: `0 0 40px ${resultLevel.color}40`,
+                      }}
+                    >
+                      <span className="text-4xl">{resultLevel.emoji}</span>
+                    </div>
+                    <h3 className="text-2xl md:text-3xl font-bold text-white mb-3">
+                      {currentStory.title} · 完结
+                    </h3>
+                    <div className="flex items-center justify-center gap-3 mb-4">
+                      <div
+                        className="px-4 py-1.5 rounded-full text-sm font-bold"
+                        style={{
+                          background: `${resultLevel.color}18`,
+                          color: resultLevel.color,
+                          border: `1px solid ${resultLevel.color}40`,
+                        }}
+                      >
+                        你的评级：{resultLevel.label}
+                      </div>
+                    </div>
+                    <p className="text-museum-200/70 max-w-2xl mx-auto">
+                      你做出了{" "}
+                      <span
+                        className="font-bold"
+                        style={{ color: "#06ffa5" }}
+                      >
+                        {storyStats.totalAdaptive}
+                      </span>{" "}
+                      次理性决策，
+                      理性决策率{" "}
+                      <span
+                        className="font-bold"
+                        style={{ color: resultLevel.color }}
+                      >
+                        {Math.round(storyStats.adaptiveRate * 100)}%
+                      </span>
+                    </p>
+                  </>
+                );
+              })()}
+            </div>
+
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8 max-w-2xl mx-auto">
+              {currentStory.scenes.map((scene, idx) => {
+                const answered = answeredStoryQuestions.find(
+                  (q) => q.sceneId === scene.id
+                );
+                const isAdaptive = answered?.isAdaptive ?? false;
+
+                return (
+                  <div
+                    key={scene.id}
+                    className="p-4 rounded-xl text-center"
+                    style={{
+                      background: isAdaptive
+                        ? "rgba(6, 255, 165, 0.08)"
+                        : "rgba(230, 57, 70, 0.08)",
+                      border: isAdaptive
+                        ? "1px solid rgba(6, 255, 165, 0.25)"
+                        : "1px solid rgba(230, 57, 70, 0.25)",
+                    }}
+                  >
+                    <div className="text-2xl mb-2">
+                      {isAdaptive ? "✅" : "⚡"}
+                    </div>
+                    <div
+                      className="text-2xl font-bold mb-1"
+                      style={{ color: isAdaptive ? "#06ffa5" : "#e63946" }}
+                    >
+                      {idx + 1}
+                    </div>
+                    <p className="text-xs text-museum-300/60">
+                      场景{idx + 1}
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
+
+            {(() => {
+              const resultLevel = getStoryResultLevel(storyStats.adaptiveRate);
+              return (
+                <div
+                  className="p-6 rounded-2xl max-w-2xl mx-auto mb-8"
+                  style={{
+                    background: `linear-gradient(135deg, ${currentStory.color}12, ${resultLevel.color}08)`,
+                    border: `1px solid ${currentStory.color}30`,
+                  }}
+                >
+                  <h4 className="text-lg font-bold text-white mb-3">
+                    {resultLevel.label} · 剧情分析
+                  </h4>
+                  <p className="text-sm text-museum-200/80 leading-relaxed">
+                    {resultLevel.description}
+                  </p>
+                </div>
+              );
+            })()}
+
+            <div className="glass-card p-6 md:p-8 mb-8">
+              <h4 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
+                <Brain className="w-5 h-5" style={{ color: currentStory.color }} />
+                🧪 你在剧情中学到的神经科学
+              </h4>
+              <p className="text-sm text-museum-300/60 mb-6">
+                这些都是你在剧情中亲身经历的神经机制。记住它们，下次在真实生活中遇到类似场景时，你就能识别出大脑在做什么。
+              </p>
+
+              <div className="space-y-4">
+                {currentStory.neuroscienceLessons.map((lesson, idx) => (
+                  <div
+                    key={idx}
+                    className="p-4 rounded-xl"
+                    style={{
+                      background: `${currentStory.color}06`,
+                      border: `1px solid ${currentStory.color}20`,
+                    }}
+                  >
+                    <div className="flex items-start gap-3">
+                      <div
+                        className="w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold flex-shrink-0"
+                        style={{
+                          background: `${currentStory.color}20`,
+                          color: currentStory.color,
+                        }}
+                      >
+                        {idx + 1}
+                      </div>
+                      <p className="text-sm text-museum-200/80 leading-relaxed">
+                        {lesson}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="glass-card p-6 md:p-8 mb-8">
+              <h4 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
+                <Sparkles className="w-5 h-5" style={{ color: "#fb5607" }} />
+                🎭 你的每一个选择，都在塑造你的大脑
+              </h4>
+              <p className="text-sm text-museum-200/80 leading-relaxed mb-4">
+                神经科学最重要的发现之一是<span className="font-bold text-white">神经可塑性（Neuroplasticity）</span>——
+                你的大脑会根据你的经历不断重新布线。
+              </p>
+              <div className="space-y-3 text-sm text-museum-200/80 leading-relaxed">
+                <p>
+                  每次你<span className="font-bold" style={{ color: "#06ffa5" }}>抵制了刷手机的冲动</span>，
+                  前额叶到伏隔核的抑制性连接就会增强一点；
+                </p>
+                <p>
+                  每次你<span className="font-bold" style={{ color: "#06ffa5" }}>选择了健康餐</span>，
+                  眶额叶皮层对健康食物的价值评估权重就会增加一点；
+                </p>
+                <p>
+                  每次你<span className="font-bold" style={{ color: "#06ffa5" }}>真诚地为别人的成功高兴</span>，
+                  腹内侧前额叶的共情回路就会强化一点；
+                </p>
+                <p>
+                  每次你<span className="font-bold" style={{ color: "#06ffa5" }}>选择了延迟满足</span>，
+                  前额叶对腹侧纹状体的控制力就会增强一点。
+                </p>
+              </div>
+              <p className="text-sm text-museum-200/80 leading-relaxed mt-4">
+                <span className="font-bold" style={{ color: "#fb5607" }}>
+                  你不是在"对抗你的大脑"——你是在"训练你的大脑"。
+                </span>
+                每一个小的、正确的选择，都是在给大脑重新布线。日积月累，你会发现：
+                以前需要靠意志力硬扛的事情，现在变得自然而然了。
+              </p>
+            </div>
+
+            <div className="text-center mt-8 flex items-center justify-center gap-4">
+              <button
+                onClick={exitStory}
+                className="btn-secondary gap-2"
+              >
+                <ArrowLeft className="w-4 h-4" />
+                返回选择其他模式
+              </button>
+              <button
+                onClick={handleComplete}
+                disabled={completed}
+                className="btn-primary gap-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+              >
+                <Brain className="w-4 h-4" />
+                {completed ? "正在生成..." : "查看脑区参与链路"}
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+        )}
+
+        {phase === "result" && !isPrimitive && !isStory && (
           <div className="animate-fade-in">
             <div className="text-center mb-8">
               <div
