@@ -1,11 +1,12 @@
 import { Link, useLocation } from "react-router-dom";
-import { Home, Brain, Map } from "lucide-react";
+import { Home, Brain, Map, RotateCcw } from "lucide-react";
 import { useBrainMap } from "@/hooks/useBrainMap";
 
 export default function Navbar() {
   const location = useLocation();
   const isHome = location.pathname === "/";
   const isBrainMap = location.pathname === "/brain-map";
+  const isBrainReplay = location.pathname === "/brain-replay";
   const { completionStats } = useBrainMap();
   const stats = completionStats;
 
@@ -23,6 +24,18 @@ export default function Navbar() {
         </Link>
 
         <div className="flex items-center gap-2">
+          <Link
+            to="/brain-replay"
+            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all ${
+              isBrainReplay
+                ? "bg-neon-pink/20 border border-neon-pink/40 text-white"
+                : "text-museum-300/70 hover:text-white hover:bg-white/5 border border-transparent"
+            }`}
+          >
+            <RotateCcw className="w-4 h-4" />
+            <span className="hidden sm:inline">大脑回放</span>
+          </Link>
+
           <Link
             to="/brain-map"
             className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all ${
@@ -46,7 +59,7 @@ export default function Navbar() {
             )}
           </Link>
 
-          {!isHome && !isBrainMap && (
+          {!isHome && !isBrainMap && !isBrainReplay && (
             <Link to="/" className="btn-secondary text-sm py-2 px-4 gap-1">
               <Home className="w-4 h-4" />
               <span className="hidden sm:inline">返回大厅</span>
