@@ -11,6 +11,7 @@ import {
   Eye,
   Activity,
   Lightbulb,
+  ChevronRight,
 } from "lucide-react";
 
 interface BrainSystemMalfunctionProps {
@@ -150,9 +151,6 @@ export default function BrainSystemMalfunction({
   const handleGuess = (guess: MalfunctionType) => {
     setUserGuess(guess);
     setPhase("reveal");
-    setTimeout(() => {
-      onComplete();
-    }, 500);
   };
 
   const getGuessCorrect = () => {
@@ -328,13 +326,28 @@ export default function BrainSystemMalfunction({
                 </p>
               </div>
             </div>
-            <p className="text-museum-200/70 mb-2">
-              你感受到变化了吗？成绩下降了{" "}
-              <span className="text-red-400 font-bold">
-                {score.normal - score.malfunction}
-              </span>{" "}
-              分
-            </p>
+            {score.normal > score.malfunction ? (
+              <p className="text-museum-200/70 mb-2">
+                你感受到变化了吗？成绩下降了{" "}
+                <span className="text-red-400 font-bold">
+                  {score.normal - score.malfunction}
+                </span>{" "}
+                分
+              </p>
+            ) : score.normal < score.malfunction ? (
+              <p className="text-museum-200/70 mb-2">
+                哇！你反而表现得更好！成绩上升了{" "}
+                <span className="text-green-400 font-bold">
+                  {score.malfunction - score.normal}
+                </span>{" "}
+                分
+              </p>
+            ) : (
+              <p className="text-museum-200/70 mb-2">
+                成绩几乎没变化！{" "}
+                <span className="text-yellow-400 font-bold">两种模式下表现相同</span>
+              </p>
+            )}
           </div>
 
           <div className="glass-card p-8">
@@ -461,10 +474,14 @@ export default function BrainSystemMalfunction({
             </div>
           </div>
 
-          <div className="flex justify-center gap-4">
+          <div className="flex flex-col sm:flex-row justify-center gap-4">
             <button onClick={restart} className="btn-secondary gap-2">
               <RotateCcw className="w-4 h-4" />
               再试一次（随机故障）
+            </button>
+            <button onClick={onComplete} className="btn-primary gap-2">
+              查看完整原理解释
+              <ChevronRight className="w-4 h-4" />
             </button>
           </div>
         </div>
