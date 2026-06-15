@@ -11,6 +11,7 @@ import {
   ShieldAlert,
   Flame,
   Sparkles,
+  Brain,
 } from "lucide-react";
 import type { SubExperiment } from "@/data/experiments";
 
@@ -63,6 +64,178 @@ interface AnsweredQuestion {
   targetBias: BiasType;
   category: CategoryType;
 }
+
+const TruncatedYAxisChart = () => (
+  <div className="glass-card p-4 rounded-lg mb-4">
+    <div className="text-center text-sm text-museum-300 mb-3">A、B产品月销量对比</div>
+    <svg viewBox="0 0 280 200" className="w-full max-w-md mx-auto">
+      <defs>
+        <linearGradient id="barA" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stopColor="#60a5fa" />
+          <stop offset="100%" stopColor="#3b82f6" />
+        </linearGradient>
+        <linearGradient id="barB" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stopColor="#f97316" />
+          <stop offset="100%" stopColor="#ea580c" />
+        </linearGradient>
+      </defs>
+      <line x1="50" y1="20" x2="50" y2="170" stroke="#64748b" strokeWidth="1" />
+      <line x1="50" y1="170" x2="270" y2="170" stroke="#64748b" strokeWidth="1" />
+      <text x="45" y="25" textAnchor="end" fill="#94a3b8" fontSize="10">10000</text>
+      <line x1="45" y1="20" x2="50" y2="20" stroke="#64748b" strokeWidth="1" />
+      <text x="45" y="65" textAnchor="end" fill="#94a3b8" fontSize="10">9500</text>
+      <line x1="45" y1="60" x2="50" y2="60" stroke="#64748b" strokeWidth="1" />
+      <text x="45" y="105" textAnchor="end" fill="#94a3b8" fontSize="10">9000</text>
+      <line x1="45" y1="100" x2="50" y2="100" stroke="#64748b" strokeWidth="1" />
+      <text x="45" y="145" textAnchor="end" fill="#94a3b8" fontSize="10">8500</text>
+      <line x1="45" y1="140" x2="50" y2="140" stroke="#64748b" strokeWidth="1" />
+      <text x="45" y="175" textAnchor="end" fill="#94a3b8" fontSize="10">8000</text>
+      <rect x="90" y="140" width="50" height="30" rx="2" fill="url(#barA)" />
+      <rect x="170" y="20" width="50" height="150" rx="2" fill="url(#barB)" />
+      <text x="115" y="185" textAnchor="middle" fill="#60a5fa" fontSize="11" fontWeight="bold">A产品</text>
+      <text x="195" y="185" textAnchor="middle" fill="#f97316" fontSize="11" fontWeight="bold">B产品</text>
+      <text x="115" y="135" textAnchor="middle" fill="#cbd5e1" fontSize="9">8500</text>
+      <text x="195" y="15" textAnchor="middle" fill="#cbd5e1" fontSize="9">10000</text>
+    </svg>
+  </div>
+);
+
+const Misleading3DPieChart = () => (
+  <div className="glass-card p-4 rounded-lg mb-4">
+    <div className="text-center text-sm text-museum-300 mb-3">用户年龄分布</div>
+    <svg viewBox="0 0 280 240" className="w-full max-w-md mx-auto">
+      <defs>
+        <ellipse cx="140" cy="160" rx="100" ry="25" fill="#1e293b" />
+        <ellipse cx="140" cy="158" rx="100" ry="25" fill="#1e3a5f" opacity="0.5" />
+        <path d="M 140 90 L 240 140 A 100 100 0 0 0 150 100 Z" fill="#60a5fa" />
+        <path d="M 140 90 L 150 100 A 100 100 0 0 0 135 95 Z" fill="#34d399" />
+        <path d="M 140 90 L 135 95 A 100 100 0 0 0 40 140 Z" fill="#f97316" />
+        <path d="M 40 140 L 140 90 L 240 140 L 240 160 L 140 205 L 40 160 Z" fill="#1e3a5f" opacity="0.3" />
+        <path d="M 140 90 L 240 140 L 240 160 L 140 205 L 150 100 Z" fill="#3b82f6" opacity="0.4" />
+        <path d="M 140 90 L 150 100 L 140 205 L 135 95 Z" fill="#10b981" opacity="0.4" />
+        <path d="M 140 90 L 135 95 L 40 140 L 40 160 L 140 205 Z" fill="#ea580c" opacity="0.4" />
+        <ellipse cx="140" cy="90" rx="100" ry="35" fill="none" stroke="#475569" strokeWidth="1" strokeDasharray="3 3" />
+      </defs>
+      <g transform="translate(20, 200)">
+        <rect width="12" height="12" rx="2" fill="#60a5fa" />
+        <text x="20" y="10" fill="#cbd5e1" fontSize="11">18-24岁: 35%</text>
+      </g>
+      <g transform="translate(160, 200)">
+        <rect width="12" height="12" rx="2" fill="#34d399" />
+        <text x="20" y="10" fill="#cbd5e1" fontSize="11">25-34岁: 40%</text>
+      </g>
+      <g transform="translate(20, 220)">
+        <rect width="12" height="12" rx="2" fill="#f97316" />
+        <text x="20" y="10" fill="#cbd5e1" fontSize="11">35岁以上: 25%</text>
+      </g>
+    </svg>
+  </div>
+);
+
+const InconsistentXAxisChart = () => (
+  <div className="glass-card p-4 rounded-lg mb-4">
+    <div className="text-center text-sm text-museum-300 mb-3">某产品用户增长趋势</div>
+    <svg viewBox="0 0 300 220" className="w-full max-w-md mx-auto">
+      <line x1="40" y1="30" x2="40" y2="180" stroke="#64748b" strokeWidth="1" />
+      <line x1="40" y1="180" x2="290" y2="180" stroke="#64748b" strokeWidth="1" />
+      <text x="35" y="35" textAnchor="end" fill="#94a3b8" fontSize="10">100万</text>
+      <line x1="35" y1="30" x2="40" y2="30" stroke="#64748b" strokeWidth="1" />
+      <text x="35" y="80" textAnchor="end" fill="#94a3b8" fontSize="10">75万</text>
+      <line x1="35" y1="75" x2="40" y2="75" stroke="#64748b" strokeWidth="1" />
+      <text x="35" y="125" textAnchor="end" fill="#94a3b8" fontSize="10">50万</text>
+      <line x1="35" y1="120" x2="40" y2="120" stroke="#64748b" strokeWidth="1" />
+      <text x="35" y="170" textAnchor="end" fill="#94a3b8" fontSize="10">25万</text>
+      <line x1="35" y1="165" x2="40" y2="165" stroke="#64748b" strokeWidth="1" />
+      <text x="35" y="188" textAnchor="end" fill="#94a3b8" fontSize="10">0</text>
+      <polyline
+        points="
+          40,165 60,160 80,155 100,145 120,135 140,125 160,115 180,105 200,95 220,85
+          240,80 260,75 280,70
+        "
+        fill="none"
+        stroke="#a855f7"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <circle cx="40" cy="165" r="3" fill="#a855f7" />
+      <circle cx="120" cy="135" r="3" fill="#a855f7" />
+      <circle cx="200" cy="95" r="3" fill="#a855f7" />
+      <circle cx="280" cy="70" r="3" fill="#a855f7" />
+      <text x="40" y="198" textAnchor="middle" fill="#94a3b8" fontSize="9">第1周</text>
+      <text x="120" y="198" textAnchor="middle" fill="#94a3b8" fontSize="9">第8周</text>
+      <text x="200" y="198" textAnchor="middle" fill="#94a3b8" fontSize="9">第6月</text>
+      <text x="280" y="198" textAnchor="middle" fill="#94a3b8" fontSize="9">第12月</text>
+      <path
+        d="M 40,165 L 60,160 L 80,155 L 100,145 L 120,135 L 140,125 L 160,115 L 180,105 L 200,95 L 220,85 L 240,80 L 260,75 L 280,70"
+        fill="rgba(168, 85, 247, 0.1)"
+        stroke="none"
+      />
+    </svg>
+  </div>
+);
+
+const DualYAxisChart = () => (
+  <div className="glass-card p-4 rounded-lg mb-4">
+    <div className="text-center text-sm text-museum-300 mb-3">A公司 vs B公司营收增长</div>
+    <svg viewBox="0 0 300 220" className="w-full max-w-md mx-auto">
+      <line x1="50" y1="30" x2="50" y2="180" stroke="#64748b" strokeWidth="1" />
+      <line x1="50" y1="180" x2="270" y2="180" stroke="#64748b" strokeWidth="1" />
+      <line x1="270" y1="30" x2="270" y2="180" stroke="#64748b" strokeWidth="1" />
+      <text x="45" y="35" textAnchor="end" fill="#60a5fa" fontSize="10">200亿</text>
+      <line x1="45" y1="30" x2="50" y2="30" stroke="#64748b" strokeWidth="1" />
+      <text x="45" y="80" textAnchor="end" fill="#60a5fa" fontSize="10">150亿</text>
+      <line x1="45" y1="75" x2="50" y2="75" stroke="#64748b" strokeWidth="1" />
+      <text x="45" y="125" textAnchor="end" fill="#60a5fa" fontSize="10">100亿</text>
+      <line x1="45" y1="120" x2="50" y2="120" stroke="#64748b" strokeWidth="1" />
+      <text x="45" y="170" textAnchor="end" fill="#60a5fa" fontSize="10">50亿</text>
+      <line x1="45" y1="165" x2="50" y2="165" stroke="#64748b" strokeWidth="1" />
+      <text x="275" y="35" textAnchor="start" fill="#f97316" fontSize="10">40亿</text>
+      <line x1="270" y1="30" x2="275" y2="30" stroke="#64748b" strokeWidth="1" />
+      <text x="275" y="80" textAnchor="start" fill="#f97316" fontSize="10">30亿</text>
+      <line x1="270" y1="75" x2="275" y2="75" stroke="#64748b" strokeWidth="1" />
+      <text x="275" y="125" textAnchor="start" fill="#f97316" fontSize="10">20亿</text>
+      <line x1="270" y1="120" x2="275" y2="120" stroke="#64748b" strokeWidth="1" />
+      <text x="275" y="170" textAnchor="start" fill="#f97316" fontSize="10">10亿</text>
+      <line x1="270" y1="165" x2="275" y2="165" stroke="#64748b" strokeWidth="1" />
+      <polyline
+        points="60,120 130,95 200,85 260,75"
+        fill="none"
+        stroke="#60a5fa"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <circle cx="60" cy="120" r="4" fill="#60a5fa" />
+      <circle cx="130" cy="95" r="4" fill="#60a5fa" />
+      <circle cx="200" cy="85" r="4" fill="#60a5fa" />
+      <circle cx="260" cy="75" r="4" fill="#60a5fa" />
+      <text x="60" y="138" textAnchor="middle" fill="#cbd5e1" fontSize="10">2023</text>
+      <text x="130" y="138" textAnchor="middle" fill="#cbd5e1" fontSize="10">2024</text>
+      <text x="200" y="138" textAnchor="middle" fill="#cbd5e1" fontSize="10">2025</text>
+      <text x="260" y="138" textAnchor="middle" fill="#cbd5e1" fontSize="10">2026</text>
+      <polyline
+        points="60,165 130,135 200,105 260,75"
+        fill="none"
+        stroke="#f97316"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeDasharray="6 3"
+      />
+      <circle cx="60" cy="165" r="4" fill="#f97316" />
+      <circle cx="130" cy="135" r="4" fill="#f97316" />
+      <circle cx="200" cy="105" r="4" fill="#f97316" />
+      <circle cx="260" cy="75" r="4" fill="#f97316" />
+      <g transform="translate(70, 10)">
+        <rect width="10" height="10" rx="2" fill="#60a5fa" />
+        <text x="16" y="9" fill="#cbd5e1" fontSize="10">A公司（左轴）</text>
+        <rect x="100" width="10" height="10" rx="2" fill="#f97316" />
+        <text x="116" y="9" fill="#cbd5e1" fontSize="10">B公司（右轴）</text>
+      </g>
+    </svg>
+  </div>
+);
 
 const CATEGORY_META: Record<CategoryType, {
   label: string;
@@ -221,7 +394,8 @@ const QUESTIONS: Question[] = [
     category: "visual-mislead",
     categoryIndex: 1,
     questionNumber: 5,
-    title: "看到一张销售业绩对比柱状图：A产品柱子只到B产品柱子高度的约1/3。你的直觉是B产品销量是A的3倍左右。但你发现Y轴（纵轴）不是从0开始的，而是从8000开始的。你觉得？",
+    title: "下面是一张销售业绩对比柱状图，展示A、B产品的月销量。看完图后，你的直觉是？",
+    visualHint: <TruncatedYAxisChart />,
     options: [
       { id: "a", label: "Y轴从哪开始不重要，看柱子高度差就够了", isDeceptive: true },
       { id: "b", label: "这是经典的截断Y轴手法，实际差距可能远没有看起来那么大", isDeceptive: false },
@@ -229,51 +403,54 @@ const QUESTIONS: Question[] = [
     ],
     correctOptionId: "b",
     targetBias: "anchoring-effect",
-    biasExplanation: "这是数据可视化最常见的骗术——截断Y轴。如果Y轴从0开始，两根柱子可能只差了20%，但从8000开始，视觉上差距会被夸张到3倍甚至10倍。媒体、广告、PPT演讲中几乎每天都在用这个套路。",
+    biasExplanation: "这是数据可视化最常见的骗术——截断Y轴。实际数据：A产品8500，B产品10000，只差了17.6%！但因为Y轴从8000开始，B的柱子高度是A的5倍（高150像素 vs 高30像素），视觉上B看起来是A的5倍销量。媒体、广告、PPT演讲中几乎每天都在用这个套路。",
   },
   {
     id: "vm-2",
     category: "visual-mislead",
     categoryIndex: 1,
     questionNumber: 6,
-    title: "一个饼图展示用户年龄分布：18-24岁占35%，25-34岁占40%，35岁以上占25%。但你发现这三个数字加起来是100%，但饼图每个扇形的面积看起来几乎一样大。你觉得？",
+    title: "下面是一个3D饼图展示用户年龄分布。看完图后，你觉得？",
+    visualHint: <Misleading3DPieChart />,
     options: [
       { id: "a", label: "饼图可能是2D转3D角度产生的视觉误差，数据应该是对的", isDeceptive: true },
-      { id: "b", label: "饼图扇形面积和数据明显不符，这是在误导读者", isDeceptive: false },
+      { id: "b", label: "饼图扇形面积和数据明显不符，这是在刻意误导读者", isDeceptive: false },
       { id: "c", label: "数字对就行，图形只是装饰", isDeceptive: true },
     ],
     correctOptionId: "b",
     targetBias: "anchoring-effect",
-    biasExplanation: "3D饼图是另一个经典骗术——透视角度会让靠近观察者的扇形看起来比实际大得多。加上人们本来就不擅长比较扇形面积（柱状图更容易准确比较），3D饼图几乎每次都是在刻意误导。",
+    biasExplanation: "3D饼图是另一个经典骗术——透视角度会让靠近观察者的扇形看起来比实际大得多。加上人们本来就不擅长比较扇形面积（柱状图更容易准确比较），3D饼图几乎每次都是在刻意误导。真实数据：25-34岁占40%（最大），18-24岁35%，35岁以上25%（最小），但视觉上你会觉得蓝色的18-24岁组最大。",
   },
   {
     id: "vm-3",
     category: "visual-mislead",
     categoryIndex: 1,
     questionNumber: 7,
-    title: "一张折线图展示'某产品用户增长'。X轴是时间，但前10个点之间每个代表一周，后面的点突然变成每个代表一个月，Y轴刻度也突然变密了。你的直觉？",
+    title: "下面是一张折线图展示'某产品用户增长'。看完图后，你的直觉是？",
+    visualHint: <InconsistentXAxisChart />,
     options: [
-      { id: "a", label: "线一直在往上走，说明增长趋势很好", isDeceptive: true },
+      { id: "a", label: "线一直在往上走，说明增长趋势很好、越来越快", isDeceptive: true },
       { id: "b", label: "坐标轴被改过了，这张图不能看，趋势很可能被美化了", isDeceptive: false },
       { id: "c", label: "可能只是数据更新频率变了，不影响趋势判断", isDeceptive: true },
     ],
     correctOptionId: "b",
     targetBias: "framing-effect",
-    biasExplanation: "改坐标轴刻度是'数据美容'的常用手法。X轴单位不一会让'增长放缓'被伪装成'持续高增长'。专业做法是：坐标轴刻度必须等距、单位统一，任何刻度变动都必须标注说明。",
+    biasExplanation: "改坐标轴刻度是'数据美容'的常用手法。看X轴标签：前两个点是'第1周'→'第8周'，差了7周但像素间隔只有80像素；后两个点是'第6月'→'第12月'，差了6个月但像素间隔也是80像素！X轴单位不一会让'增长放缓'被伪装成'持续高增长'。实际增速：前8周增长了30万（约每周3.75万），后面48周只增长了65万（约每周1.35万），增速已经大幅放缓了！专业做法是：坐标轴刻度必须等距、单位统一。",
   },
   {
     id: "vm-4",
     category: "visual-mislead",
     categoryIndex: 1,
     questionNumber: 8,
-    title: "一张双折线图：A公司营收从100亿涨到150亿（+50%），B公司从10亿涨到30亿（+200%）。但两条线的Y轴用的是完全不同的刻度，A线的150亿和B线的30亿在图上高度一样。你觉得？",
+    title: "下面是一张双折线图对比A公司和B公司的营收增长。看完图后，你觉得？",
+    visualHint: <DualYAxisChart />,
     options: [
-      { id: "a", label: "两个公司营收都在涨，大家都很强", isDeceptive: true },
+      { id: "a", label: "两个公司营收都在涨，大家都很强，增长势头差不多", isDeceptive: true },
       { id: "b", label: "双Y轴不透明是典型的'混淆对比'，单独画才能看出真实差距", isDeceptive: false },
     ],
     correctOptionId: "b",
     targetBias: "anchoring-effect",
-    biasExplanation: "双Y轴的暗黑用法：给两个规模完全不同的数据各自配一个Y轴，让小公司的暴涨线和大公司的稳步增长线看起来'差不多高'。配合标题'A公司 vs B公司业绩对比'，读者会误以为两者在同一量级。",
+    biasExplanation: "双Y轴的暗黑用法：给两个规模完全不同的数据各自配一个Y轴，让小公司的暴涨线和大公司的稳步增长线看起来'差不多高'。真实数据：A公司从100亿到150亿（+50亿），B公司从10亿到30亿（+20亿），绝对值差了2.5倍！而且看2026年终点，两条线居然一样高——但一个是150亿，另一个是30亿，差了5倍！配合标题'A公司 vs B公司业绩对比'，读者会误以为两者在同一量级。",
   },
   {
     id: "pi-1",
@@ -374,12 +551,12 @@ const QUESTIONS: Question[] = [
     title: "假设你在一只股票上已经亏了5万元。现在有两个选择：A）立即止损卖出，确定亏5万。B）继续持有，有50%概率回本（不亏），50%概率再亏5万（总共亏10万）。你怎么选？",
     options: [
       { id: "a", label: "选B，死扛不卖，万一回本了呢？割肉太痛了", isDeceptive: true },
-      { id: "b", label: "选A，亏了就亏了，现金为王，不承担额外风险", isDeceptive: true },
+      { id: "b", label: "选A，亏了就亏了，现金为王，不承担额外风险", isDeceptive: false },
       { id: "c", label: "忽略已经亏的5万，只看这个股票未来值不值得持有", isDeceptive: false },
     ],
     correctOptionId: "c",
     targetBias: "loss-aversion",
-    biasExplanation: "损失厌恶+沉没成本双重暴击！已经亏的5万是沉没成本，理性决策时必须完全忽略。你唯一应该问的问题是：'站在今天，这只股票未来上涨的概率和幅度是否值得我继续承担风险？'但90%的散户会因为'不想承认亏损'而死扛，结果经常亏到退市。这就是为什么'截断亏损，让利润奔跑'永远是知易行难。",
+    biasExplanation: "损失厌恶+沉没成本双重暴击！已经亏的5万是沉没成本，理性决策时必须完全忽略。你唯一应该问的问题是：'站在今天，这只股票未来上涨的概率和幅度是否值得我继续承担风险？'选B死扛不卖是典型的损失厌恶——为了避免'兑现损失'的痛苦，你愿意承担更大的风险。选A止损是合理的保守策略，但C才是最理性的：忽略沉没成本，只看未来。90%的散户会选B死扛，结果经常亏到退市。",
   },
   {
     id: "rj-4",
@@ -431,6 +608,8 @@ export default function CognitiveBias({
   const [showExplanation, setShowExplanation] = useState(false);
   const [answeredQuestions, setAnsweredQuestions] = useState<AnsweredQuestion[]>([]);
 
+  const [completed, setCompleted] = useState(false);
+
   const subList = subExperiments ?? [];
 
   const currentQuestion = QUESTIONS[currentQuestionIdx];
@@ -463,6 +642,7 @@ export default function CognitiveBias({
     setSelectedOption(null);
     setShowExplanation(false);
     setAnsweredQuestions([]);
+    setCompleted(false);
   };
 
   const selectOption = (optionId: string) => {
@@ -497,10 +677,13 @@ export default function CognitiveBias({
       setShowExplanation(false);
     } else {
       setPhase("result");
-      setTimeout(() => {
-        onComplete();
-      }, 2000);
     }
+  };
+
+  const handleComplete = () => {
+    if (completed) return;
+    setCompleted(true);
+    onComplete();
   };
 
   const biasStats = useMemo(() => {
@@ -917,6 +1100,12 @@ export default function CognitiveBias({
               </h4>
             </div>
 
+            {currentQuestion.visualHint && (
+              <div className="mb-6">
+                {currentQuestion.visualHint}
+              </div>
+            )}
+
             {!showExplanation ? (
               <div>
                 <div className="space-y-3 mb-8">
@@ -1242,8 +1431,16 @@ export default function CognitiveBias({
               </div>
             )}
 
-            <div className="text-center text-museum-300/60 text-sm">
-              即将生成脑区参与链路图...
+            <div className="text-center mt-8">
+              <button
+                onClick={handleComplete}
+                disabled={completed}
+                className="btn-primary gap-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+              >
+                <Brain className="w-4 h-4" />
+                {completed ? "正在生成..." : "查看脑区参与链路"}
+                <ChevronRight className="w-4 h-4" />
+              </button>
             </div>
           </div>
         )}
