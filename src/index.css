@@ -149,3 +149,22 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(180deg, #b86be8, #5c5cff);
 }
+
+.glitch-text {
+  animation: glitch-text 0.3s ease-in-out infinite;
+  text-shadow: 2px 0 #ff006e, -2px 0 #00d4ff;
+}
+
+.glitch-text-2 {
+  animation: glitch-text 0.5s ease-in-out infinite;
+  animation-delay: 0.1s;
+  text-shadow: -1px 0 #ffbe0b, 1px 0 #9d4edd;
+}
+
+@keyframes glitch-text {
+  0%, 100% { transform: translate(0); }
+  20% { transform: translate(-1px, 1px); }
+  40% { transform: translate(1px, -1px); }
+  60% { transform: translate(-1px, -1px); }
+  80% { transform: translate(1px, 1px); }
+}

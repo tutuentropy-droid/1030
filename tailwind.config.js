@@ -49,6 +49,8 @@ export default {
         "fade-in": "fade-in 0.6s ease-out",
         "slide-up": "slide-up 0.6s ease-out",
         "bounce-slow": "bounce-slow 3s ease-in-out infinite",
+        "glitch": "glitch 0.3s ease-in-out infinite",
+        "shake": "shake 0.5s ease-in-out infinite",
       },
       keyframes: {
         float: {
@@ -75,6 +77,18 @@ export default {
         "bounce-slow": {
           "0%, 100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(-10px)" },
+        },
+        glitch: {
+          "0%, 100%": { transform: "translate(0)", opacity: "1" },
+          "20%": { transform: "translate(-2px, 2px)", opacity: "0.8" },
+          "40%": { transform: "translate(2px, -2px)", opacity: "0.9" },
+          "60%": { transform: "translate(-1px, -1px)", opacity: "0.7" },
+          "80%": { transform: "translate(1px, 1px)", opacity: "0.85" },
+        },
+        shake: {
+          "0%, 100%": { transform: "translateX(0)" },
+          "10%, 30%, 50%, 70%, 90%": { transform: "translateX(-5px)" },
+          "20%, 40%, 60%, 80%": { transform: "translateX(5px)" },
         },
       },
       backdropBlur: {

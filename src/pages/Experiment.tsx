@@ -1,6 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import { useState } from "react";
-import { ArrowLeft, RotateCcw, Lightbulb, Brain, Zap, Map, Sparkles, Moon, Shield, FlaskConical } from "lucide-react";
+import { ArrowLeft, RotateCcw, Lightbulb, Brain, Zap, Map, Sparkles, Moon, Shield, FlaskConical, AlertTriangle } from "lucide-react";
 import { getExperimentById, type SubExperiment } from "@/data/experiments";
 import ExplanationCard from "@/components/ExplanationCard";
 import ColorIllusion from "@/experiments/ColorIllusion";
@@ -13,6 +13,7 @@ import RewardCircuit from "@/experiments/RewardCircuit";
 import DreamNeuroscience from "@/experiments/DreamNeuroscience";
 import CognitiveBias from "@/experiments/CognitiveBias";
 import NeuroscienceHistory from "@/experiments/NeuroscienceHistory";
+import BrainSystemMalfunction from "@/experiments/BrainSystemMalfunction";
 import { useBrainMap } from "@/hooks/useBrainMap";
 import { getBrainRegionsByExperiment } from "@/data/brainRegions";
 import UnlockCelebration from "@/components/UnlockCelebration";
@@ -30,6 +31,7 @@ const experimentComponents: Record<string, React.ComponentType<{ onComplete: () 
   "dream-neuroscience": DreamNeuroscience,
   "cognitive-bias": CognitiveBias,
   "neuroscience-history": NeuroscienceHistory,
+  "brain-system-malfunction": BrainSystemMalfunction,
 };
 
 export default function Experiment() {
@@ -105,6 +107,7 @@ export default function Experiment() {
                   {experiment.icon === "Moon" && <Moon className="w-full h-full" />}
                   {experiment.icon === "Shield" && <Shield className="w-full h-full" />}
                   {experiment.icon === "FlaskConical" && <FlaskConical className="w-full h-full" />}
+                  {experiment.icon === "AlertTriangle" && <AlertTriangle className="w-full h-full" />}
                 </div>
               </div>
             <div>

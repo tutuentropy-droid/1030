@@ -389,6 +389,57 @@ export const experiments: Experiment[] = [
     ],
     hasMultiPhase: true,
   },
+  {
+    id: "brain-system-malfunction",
+    title: "大脑系统故障",
+    shortDescription: "如果你的大脑出了点小故障...",
+    icon: "AlertTriangle",
+    accentColor: "#e63946",
+    glowColor: "rgba(230, 57, 70, 0.4)",
+    introduction:
+      "如果你的大脑某个系统突然出了点小故障，会发生什么？注意力过滤失效？时间感错乱？奖励系统过载？还是记忆写不进去？在这个实验中，你将先在正常模式下完成一个日常任务建立基准线，然后系统会随机激活一种大脑故障——你需要亲身体验变化，最后猜猜到底是哪个系统出了问题。",
+    gameInstruction:
+      "第一阶段：正常模式下完成点击星星的任务，建立基准成绩。第二阶段：系统随机激活一种大脑故障，在故障状态下再次完成同样任务。感受变化，猜猜是哪种故障，最后了解背后的神经机制。每次体验都是随机的，可以反复挑战！",
+    phenomenon:
+      "我们的大脑每天都在高效运转，但当某个系统出现轻微异常时，感知和行为会发生显著变化：注意力过滤下降会让无关信息大量涌入，导致分心；时间感失真会让主观时间忽快忽慢；奖励敏感过强会让微小的奖励线索触发过度反应；记忆编码失败则会让信息转眼就忘。这些'故障'不是虚构的——它们对应着真实的神经精神状况，从ADHD到成瘾，从失忆到时间感知障碍。",
+    neurosciencePrinciple:
+      "四种故障分别对应不同的大脑系统：1）注意力过滤由顶叶皮层和丘脑网状结构管理，负责筛选感官输入，类似多动症（ADHD）的机制；2）时间感知由小脑、基底神经节和前额叶组成的分布式网络负责，多巴胺和去甲肾上腺素水平会显著影响时间感；3）奖励系统核心是中脑边缘多巴胺通路（VTA→伏隔核），过度敏感与成瘾和冲动控制障碍相关；4）记忆编码依赖海马体和内嗅皮层，受损会导致顺行性遗忘症（无法形成新记忆）。",
+    realLifeExamples: [
+      "ADHD患者的注意力过滤功能较弱，容易被无关刺激分散注意力，对应顶叶和多巴胺系统的异常",
+      "焦虑和恐惧时感觉时间变慢，是因为杏仁核激活导致神经活动密度增加，大脑'记录'了更多信息",
+      "赌博、刷短视频、游戏抽卡等行为会利用多巴胺预测误差机制，让奖励系统过度激活",
+      "海马体受损的顺行性遗忘症患者（如著名的H.M.）无法形成新的长期记忆，但旧记忆完好无损",
+      "睡眠不足会同时影响注意力、时间感、奖励决策和记忆编码——相当于多个系统同时出故障",
+      "老年人的时间感变快，与基底神经节的多巴胺水平下降、神经脉冲频率降低有关",
+    ],
+    subExperiments: [
+      {
+        id: "attention-filter",
+        title: "注意力过滤下降",
+        description: "顶叶过滤失效，无关信息大量涌入",
+        brainPathway: ["parietal-lobe", "prefrontal-cortex", "thalamus"],
+      },
+      {
+        id: "time-distortion",
+        title: "时间感失真",
+        description: "基底神经节计时紊乱，时间忽快忽慢",
+        brainPathway: ["basal-ganglia", "cerebellum", "prefrontal-cortex"],
+      },
+      {
+        id: "reward-hypersensitivity",
+        title: "奖励敏感过强",
+        description: "多巴胺系统过载，冲动控制失效",
+        brainPathway: ["ventral-tegmental-area", "nucleus-accumbens", "prefrontal-cortex"],
+      },
+      {
+        id: "memory-encoding",
+        title: "记忆编码失败",
+        description: "海马体编码障碍，读完就忘",
+        brainPathway: ["hippocampus", "entorhinal-cortex", "prefrontal-cortex"],
+      },
+    ],
+    hasMultiPhase: true,
+  },
 ];
 
 export function getExperimentById(id: string): Experiment | undefined {

@@ -12,6 +12,7 @@ import {
   Gift,
   Moon,
   FlaskConical,
+  AlertTriangle,
 } from "lucide-react";
 import type { Experiment } from "@/data/experiments";
 import { useBrainMap } from "@/hooks/useBrainMap";
@@ -27,6 +28,7 @@ const iconMap: Record<string, typeof Palette> = {
   Gift,
   Moon,
   FlaskConical,
+  AlertTriangle,
 };
 
 interface ExperimentCardProps {
